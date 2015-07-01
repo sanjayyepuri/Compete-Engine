@@ -1,0 +1,61 @@
+include mixins
+extends layout
+
+block content
+  if(message.length > 0)
+    div.alert.alert-danger
+      p #{message}
+  if(signupmessage.length > 0)
+    div.alert.alert-danger
+      p #{signupmessage}
+  if(loginmessage.length > 0)
+    div.alert.alert-danger
+      p #{loginmessage}
+  .jumbotron
+      h1= competition.name
+      p Welcome to #{competition.name}
+      .container
+        .row
+          .btn-group
+            .btn.btn-success(type="button", data-toggle="modal", data-target="#loginmodal") Log In
+            .btn.btn-primary(type="button", data-toggle="modal", data-target="#signupmodal") Sign up
+            
+          
+          
+    .modal(class="fade", id="loginmodal", role="dialog")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h3 Log In
+          .modal-body
+            form(action="/login" method="post")
+              .form-group
+                label(for="teamid") Team ID
+                input(class="form-control", type="text", name ="teamid", placeholder="Enter your team number")
+              .form-group
+                label(for="password") Password
+                input(class="form-control", type="password", name ="password", placeholder="Password")
+              button(type="submit" class="btn btn-primary") Log In
+          .modal-footer
+          
+    .modal(class="fade", id="signupmodal", role="dialog")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h3 Sign Up
+          .modal-body
+            form(action="/signup" method="post")
+              .form-group
+                label(for="teamid") Team ID
+                input(class="form-control", type="text", name ="teamid", placeholder="Email")
+              .form-group
+                label(for="password") Password
+                input(class="form-control", type="password", name ="password", placeholder="Password")
+              .form-group
+                label(for="schoolselect") Select Your School
+                //TODO add a list of schools to iterate through
+                select(class="form-control" name="school")
+                  each school in competition.schools
+                    option(value=school) #{school}
+              button(type="submit" class="btn btn-primary") Register
+          .modal-footer

@@ -1,0 +1,36 @@
+extends layout
+block content
+  .panel.panel-default
+    .panel-heading
+      h1 Welcome, #{user.teamid}
+    .panel-body
+      h4 #{competition.name} #{competition.date}
+  .jumbotron
+    .container
+      h3 #{user.school}
+      h4 #{user.teamid}
+      if(members)
+        each member in members
+          .col-md-4
+            .panel.panel-primary
+              .panel-heading
+                h4(class="panel-title") #{member.firstname} #{member.lastname}
+      if (members.length < 3)
+        .btn.btn-warning.pull-right(type="button", data-toggle="modal", data-target="#membermodal") Add Member
+     .modal(class="fade", id="membermodal", role="dialog")
+      .modal-dialog
+        .modal-content
+          .modal-header
+            h3 Log In
+          .modal-body
+            form(action="/addmember" method="post")
+              .form-group
+                label(for="firstname") First Name
+                input(class="form-control", type="text", name ="firstname")
+              .form-group
+                label(for="lastname") Last Name
+                input(class="form-control", type="text", name ="lastname")
+              button(type="submit" class="btn btn-primary") Add
+          .modal-footer
+            
+            

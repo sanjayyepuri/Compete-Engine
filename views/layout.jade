@@ -1,0 +1,41 @@
+include mixins
+
+doctype html
+html
+  head
+    title= title
+    +bootswatch("cyborg")
+  body(style="padding-top: 8rem; padding-bottom: 8rem;")
+    if(user)
+      nav( role="navigation", class="nav-bar navbar-inverse navbar-fixed-bottom" )
+        .container-fluid
+          .collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li
+                p.navbar-text #{user.teamid}
+              li
+                p.navbar-text #{user.school}
+            ul.nav.navbar-nav.navbar-right
+              li
+                p.navbar-text Rank: 1
+              li
+                p.navbar-text Score: #{user.teamscore}
+              li
+                p.navbar-text(id="timer") Time Remaining: 1:04.5
+            //TODO add rest of pages
+    +nav(competition.name, "dropdown_menu")
+      //+nav_item("/competition/dashboard") Dashboard
+      +nav_item("/competition/info") Info
+      //+nav_item("/competition/problems") Problems
+      //+nav_item("/competition/appeals") Appeals
+      //+nav_item() Clarifications 
+        .badge 1
+      if(user)
+        li(class=active): a( href="/logout" ) Logout, #{user.teamid}
+    .container
+      block content
+    script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
+    script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
+    script( src='/socket.io/socket.io.js')
+    script(src='/public/javascripts/main.js')
+      
