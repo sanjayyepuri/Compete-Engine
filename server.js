@@ -1,22 +1,22 @@
 var express		= require('express');
-var app			= express();
-var path 		= require('path');
-var port 		= process.env.PORT || 3000;
+var app				= express();
+var path 			= require('path');
+var port 			= process.env.PORT || 3000;
 var mongoose 	= require('mongoose');
 var passport 	= require('passport');
-var path		= require('path');
 var flash 		= require('connect-flash');
 
-var morgan		= require('morgan');
+var morgan			= require('morgan');
 var cookieParser= require('cookie-parser');
 var bodyParser 	= require('body-parser');
-var session		= require('express-session');
+var session			= require('express-session');
 
 
 //Database Setup
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url);
-//Error Handling 
+
+//Error Handling
 mongoose.connection.on('error', function(){
 	console.log('MongoDB error: ' + configDB.url);
 });
@@ -45,12 +45,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-//Passport   
+//Passport
 require('./config/passport')(passport)
 
 //Routes
 require('./app/routes.js')(app, passport);
 
 //Main
-
-console.log('On Port' + port);
+console.log('Server on port ' + port);

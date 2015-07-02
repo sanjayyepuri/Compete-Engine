@@ -1,5 +1,5 @@
   var socket = io();
-  
-  socket.on('timer', function(data){
-    $('#timer').text(data.timer);
+
+  socket.on('timer:time', function(data){
+    $('#timer').text(data.time);
   })

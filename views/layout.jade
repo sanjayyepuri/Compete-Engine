@@ -4,9 +4,9 @@ doctype html
 html
   head
     title= title
-    +bootswatch("cyborg")
+    +bootswatch("darkly")
   body(style="padding-top: 8rem; padding-bottom: 8rem;")
-    if(user)
+    if(user && user.type == 'competitor')
       nav( role="navigation", class="nav-bar navbar-inverse navbar-fixed-bottom" )
         .container-fluid
           .collapse.navbar-collapse

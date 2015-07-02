@@ -3,6 +3,21 @@ var LocalStrategy = require('passport-local').Strategy;
 var User 		= require('../app/models/user');
 
 module.exports = function(passport) {
+
+	//Create default admin account
+	User.findOne({'teamid' : 'defAdmin'}, function(err, admin){
+		if(err){
+			return err;
+		}
+		else if(!admin){
+			var newAdmin = new User();
+			newAdmin.teamid = 'defAdmin';
+			newAdmin.password = newAdmin.generateHash('root');
+			newAdmin.type = 'admin';
+			newAdmin.save();
+		}
+	})
+
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
 	});
@@ -11,7 +26,7 @@ module.exports = function(passport) {
 			done(err, user);
 		});
 	});
-	
+
 	//Sign Up
 	passport.use('local-signup', new LocalStrategy({
 		usernameField: 'teamid',
@@ -20,7 +35,7 @@ module.exports = function(passport) {
 	},
 	function(req, teamid, password, done){
 		process.nextTick(function() {
-			User.findOne({'local.teamid' : teamid}, function(err, team){
+			User.findOne({'teamid' : teamid}, function(err, team){
 				if(err)
 					return done(err);
 				if(team){
@@ -30,6 +45,7 @@ module.exports = function(passport) {
 					newUser.teamid = teamid.trim();
 					newUser.password = newUser.generateHash(password);
 					newUser.school = req.body.school;
+					newUser.type = 'competitor';
 					newUser.save(function(err){
 						if(err)
 							throw err;
@@ -39,7 +55,7 @@ module.exports = function(passport) {
 			});
 		});
 	}));
-	
+
 	//Login
 	passport.use('local-signin', new LocalStrategy({
 		usernameField: 'teamid',
@@ -60,4 +76,3 @@ module.exports = function(passport) {
 		});
 	}));
 };
-
