@@ -17,7 +17,20 @@ module.exports = function(io){
 		timer.reset();
 	});
 
+	var connectedUsers = 0;
+	// Count the number of users
+
+
 	io.on('connection', function(socket){
-		console.log('A user');
+		io.on('connect', function(){
+		  connectedUsers++;
+		});
+		io.on('disconnect', function(){
+			connectedUsers--;
+		});
+		if(connectedUsers == 1)
+			console.log(connectedUsers + " user is connected.");
+		else
+			console.log(connectedUsers  + " users are connected.");
 	});
 }

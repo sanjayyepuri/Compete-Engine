@@ -51,14 +51,25 @@ router.get('/info', loggedIn, function(req, res, next){
 	});
 });
 
+
+// The page where the problems are displayed and competitors can upload their solutions
+router.get('/problems', loggedIn, function(req, res, next){
+  res.render('problems', {
+    user        : req.user,
+    team        : req.team,
+    title       : req.user.teamid,
+    competition : Competition
+  })
+})
+
 // Save the competitor model and then link it to the team model.
 router.post('/addmember', loggedIn, function(req, res, next){
   // Create new Competitor
-  var newComp = new Competitor();
-  newComp.firstname = req.body.firstname.trim();
-  newComp.lastname = req.body.lastname.trim();
-  newComp.teamid = req.user.teamid;
-  newComp.save();
+  var newCompetitor = new Competitor();
+  newCompetitor.firstname = req.body.firstname.trim();
+  newCompetitor.lastname = req.body.lastname.trim();
+  newCompetitor.teamid = req.user.teamid;
+  newCompetitor.save();
   // Add the individual to the team
   Team.findOne({'teamid': req.user.teamid}, function(err, team){
     if(err)
@@ -68,7 +79,7 @@ router.post('/addmember', loggedIn, function(req, res, next){
       console.log('Error: Team not found.');
       return;
     }
-    team.members.push(newComp._id);
+    team.members.push(newCompetitor._id);
     team.markModified('members');
     team.save();
   });

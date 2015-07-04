@@ -4,7 +4,8 @@ doctype html
 html
   head
     title= title
-    +bootswatch("darkly")
+    +bootswatch("superhero")
+    link(href="/public/stylesheets/github-markdown.css", rel="stylesheet")
   body(style="padding-top: 8rem; padding-bottom: 8rem;")
     if(team)
       nav( role="navigation", class="nav-bar navbar-inverse navbar-fixed-bottom" )
@@ -27,9 +28,9 @@ html
       if(team)
         //+nav_item("/competition/dashboard") Dashboard
         +nav_item("/competition/info") Info
-        //+nav_item("/competition/problems") Problems
+        +nav_item("/competition/problems") Problems
         //+nav_item("/competition/appeals") Appeals
-        //+nav_item() Clarifications 
+        //+nav_item("/competition/clarifications") Clarifications 
         //.badge 1
       if(user)
         li(class=active): a( href="/logout" ) Logout, #{user.teamid}
@@ -39,4 +40,5 @@ html
     script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
     script( src='/socket.io/socket.io.js')
     script(src='/public/javascripts/main.js')
+    script(src='/public/javascripts/marked.js')
       

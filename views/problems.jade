@@ -1,0 +1,20 @@
+extends layout 
+
+block content
+  .container
+    .col-xs-4
+      h3 Problems
+      ul.nav.nav-pills.nav-stacked(id="problem-nav")
+        if(competition.problems)
+          each problem in competition.problems
+            li
+              a(href="#" location=problem.markdown) #{problem.name}
+    .col-xs-8
+      style.
+        .markdown-body {
+          min-width: 200px;
+          max-width: 790px;
+          margin: 0 auto;
+          padding: 30px;
+        }
+      div(id="problem-content").markdown-body.well HELLO
