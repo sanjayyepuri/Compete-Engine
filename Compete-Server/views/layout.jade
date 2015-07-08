@@ -4,11 +4,19 @@ doctype html
 html
   head
     title= title
+<<<<<<< HEAD:Compete-Server/views/layout.jade
     +bootswatch("darkly")
     link(href="/public/stylesheets/github-markdown.css", rel="stylesheet")
   body(style="padding-top: 8rem; padding-bottom: 8rem;")
     if(team)
       nav(style="background-color: rgba(0, 188, 140, 0.87)", class="navbar navbar-inverse navbar-fixed-bottom" )
+=======
+    +bootswatch("cyborg")
+    link(href="/public/stylesheets/github-markdown.css", rel="stylesheet")
+  body(style="padding-top: 8rem; padding-bottom: 8rem;")
+    if(team)
+      nav( role="navigation", class="nav-bar navbar-inverse navbar-fixed-bottom")
+>>>>>>> origin/master:views/layout.jade
         .container-fluid
           .collapse.navbar-collapse
             ul.nav.navbar-nav
@@ -26,7 +34,7 @@ html
             //TODO add rest of pages
     +nav(competition.name, "dropdown_menu")
       if(team)
-        //+nav_item("/competition/dashboard") Dashboard
+        +nav_item("/competition/dashboard") Dashboard
         +nav_item("/competition/info") Info
         +nav_item("/competition/problems") Problems
         //+nav_item("/competition/appeals") Appeals
