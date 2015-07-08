@@ -87,7 +87,6 @@ router.post('/addmember', loggedIn, function(req, res, next){
   res.redirect('/competition/info');
 });
 
-
 //Method to check if the user is authenticated.
 function loggedIn(req, res, next){
 	if(req.isAuthenticated())
@@ -95,6 +94,5 @@ function loggedIn(req, res, next){
 	req.flash('message', 'Please log in or sign up.');
 	res.redirect('/');
 }
-
 
 module.exports = router;

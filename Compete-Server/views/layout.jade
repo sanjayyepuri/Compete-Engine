@@ -4,11 +4,11 @@ doctype html
 html
   head
     title= title
-    +bootswatch("superhero")
+    +bootswatch("darkly")
     link(href="/public/stylesheets/github-markdown.css", rel="stylesheet")
   body(style="padding-top: 8rem; padding-bottom: 8rem;")
     if(team)
-      nav( role="navigation", class="nav-bar navbar-inverse navbar-fixed-bottom" )
+      nav(style="background-color: rgba(0, 188, 140, 0.87)", class="navbar navbar-inverse navbar-fixed-bottom" )
         .container-fluid
           .collapse.navbar-collapse
             ul.nav.navbar-nav
@@ -36,9 +36,9 @@ html
         li(class=active): a( href="/logout" ) Logout, #{user.teamid}
     .container
       block content
-    script( src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js' )
-    script( src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' )
-    script( src='/socket.io/socket.io.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+    script(src='/socket.io/socket.io.js')
     script(src='/public/javascripts/main.js')
     script(src='/public/javascripts/marked.js')
       

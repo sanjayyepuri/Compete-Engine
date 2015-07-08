@@ -3,9 +3,9 @@ module.exports = function(io){
 	var Competition = require('../config/competition.js');
 
 	//Create a Countdown
-	var timer = new Stopwatch(60000);
+	var timer = new Stopwatch(Competition.timelimithours * 3600000, {refreshRateMs: 250});
 	timer.on('time', function(time){
-		io.emit('timer:time', {time: time.ms/1000});
+		io.emit('timer:time', {time: millisecondsToTime(time.ms)});
 	});
 	io.on('click:starttimer', function() {
 		timer.start();
@@ -16,6 +16,16 @@ module.exports = function(io){
 	io.on('click:reset', function(){
 		timer.reset();
 	});
+	timer.start()
+
+
+	//function to convert milliseconds to minutes and hours string
+	function millisecondsToTime(milliseconds){
+		var seconds = Math.floor((milliseconds / 1000) % 60);
+		var minutes = Math.floor((milliseconds / (1000*60)) % 60);
+		var hours = Math.floor((milliseconds / (1000*60*60)) % 24);
+		return hours + ":" + (minutes < 10 ? '0' : '') + minutes + "." + (seconds < 10 ? '0' : '') + seconds;
+	}
 
 	var connectedUsers = 0;
 	// Count the number of users
