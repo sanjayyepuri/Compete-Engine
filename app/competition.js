@@ -62,6 +62,15 @@ router.get('/problems', loggedIn, function(req, res, next){
   })
 })
 
+router.get('/dashboard', loggedIn, function(req, res, next){
+  res.render('dashboard', {
+    user      : req.user,
+    team      : req.team,
+    title     : "Dashboard",
+    competition: Competition
+  });
+});
+
 // Save the competitor model and then link it to the team model.
 router.post('/addmember', loggedIn, function(req, res, next){
   // Create new Competitor
