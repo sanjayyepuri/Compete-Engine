@@ -2,12 +2,12 @@ module.exports = function(io){
 	var Stopwatch = require('timer-stopwatch');
 	var Competition = require('../config/competition.js');
 
-	//var competitor = io.of('/competitor');
+	var competitor = io.of('/competitor');
 
 	//Create a Countdown
 	var timer = new Stopwatch(Competition.timelimithours * 3600000, {refreshRateMs: 250});
 	timer.on('time', function(time){
-		io.emit('timer:time', {time: millisecondsToTime(time.ms)});
+		competitor.emit('timer:time', {time: millisecondsToTime(time.ms)});
 	});
 	io.on('click:starttimer', function() {
 		timer.start();
@@ -29,10 +29,9 @@ module.exports = function(io){
 		return hours + ":" + (minutes < 10 ? '0' : '') + minutes + "." + (seconds < 10 ? '0' : '') + seconds;
 	}
 
-	timer.start();
 	// Count the number of users
 	var connectedUsers = 0;
-	io.on('connection', function(socket) {
+	competitor.on('connection', function(socket) {
 		connectedUsers++;
 		console.log(connectedUsers + "  are connected.");
 		socket.on('disconnect', function(){

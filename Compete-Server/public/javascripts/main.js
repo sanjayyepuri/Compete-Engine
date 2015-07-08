@@ -1,4 +1,4 @@
-  var socket = io('/competitor');
+  var socket = io.connect('http://localhost:3000/competitor');
 
   socket.on('timer:time', function(data){
     $('#timer').text(data.time);
