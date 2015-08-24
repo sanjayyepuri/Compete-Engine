@@ -13,8 +13,11 @@
     <script src="/js/core.js"></script>
 
   </head>
+  <style>
+    body { padding-top: 70px; }
+  </style>
   <body ng-controller="mainController">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -35,58 +38,62 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="jumbotron">
-        <div class="container-fluid">
-          <h1> Teams <span class="label label-info">{{competitors.length}}</span>
+      <div class="col-md-4">
+        <div class="jumbotron">
+          <div class="container-fluid">
+            <h1> Teams <span class="label label-info">{{competitors.length}}</span>
+          </div>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4> Teams </h4>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped">
+             <thead>
+               <tr>
+                 <td>Team ID</td>
+                 <td>School</td>
+                 <td>Score</td>
+               </tr>
+             </thead>
+             <tbody>
+               <tr ng-repeat="competitor in competitors">
+                 <td> {{competitor.teamid}} </td>
+                 <td> {{competitor.school}} </td>
+                 <td> {{competitor.teamscore}} </td>
+               </tr>
+             </tbody>
 
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h4> Teams </h4>
+            </table>
+           </div>
         </div>
-        <div class="panel-body">
-          <table class="table table-striped">
-           <thead>
-             <tr>
-               <td>Team ID</td>
-               <td>School</td>
-               <td>Score</td>
-             </tr>
-           </thead>
-           <tbody>
-             <tr ng-repeat="competitor in competitors">
-               <td> {{competitor.teamid}} </td>
-               <td> {{competitor.school}} </td>
-               <td> {{competitor.teamscore}} </td>
-             </tr>
-           </tbody>
-
-          </table>
-         </div>
       </div>
+      <div class="col-md-4">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h4> Add Team </h4>
+          </div>
+          <div class="panel-body">
+            <form>
+              <div class="form-group">
+                <label for="teamname">Team ID</label>
+                <input type="text" class="form-control" name="teamname" ng-model="formData.teamid">
+              </div>
+              <div class="form-group">
+                <label for="school">School</label>
+                <input type="text" class="form-control" name="school" ng-model="formData.school">
+              </div>
+              <div class="form-group">
+                <label for="score">Score</label>
+                <input type="number" class="form-control" name="score" ng-model="formData.teamscore">
+              </div>
 
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h4> Add Team </h4>
-        </div>
-        <div class="panel-body">
-          <form>
-            <div class="form-group">
-              <label for="teamname">Team ID</label>
-              <input type="text" class="form-control" name="teamname" ng-model="formData.teamid">
-            </div>
-            <div class="form-group">
-              <label for="school">School</label>
-              <input type="text" class="form-control" name="school" ng-model="formData.school">
-            </div>
-            <div class="form-group">
-              <label for="score">Score</label>
-              <input type="number" class="form-control" name="score" ng-model="formData.teamscore">
-            </div>
-
-            <button class="btn btn-primary" ng-click="createCompetitor()">Add</button>
-          </form>
+              <button class="btn btn-primary" ng-click="createCompetitor()">Add</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
