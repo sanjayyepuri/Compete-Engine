@@ -1,55 +1,45 @@
-var express		= require('express');
-var app				= express();
-var path 			= require('path');
-var port 			= process.env.PORT || 3000;
-var mongoose 	= require('mongoose');
-var passport 	= require('passport');
-var flash 		= require('connect-flash');
+var express     = require('express');
+var app         = express();
+var port        = process.env.PORT || 8080;
 
-var morgan			= require('morgan');
+var path        = require('path');
+var mongoose    = require('mongoose');
+var passport    = require('passport');
+var flash       = require('connect-flash');
+var morgan      = require('morgan');
 var cookieParser= require('cookie-parser');
-var bodyParser 	= require('body-parser');
-var session			= require('express-session');
+var bodyParser  = require('body-parser');
+var session     = require('express-session');
+var passport    = require('passport');
 
+// Set up Database
+var dbConfig = require('./config/database.js');
+mongoose.connect(dbConfig.url);
 
-//Database Setup
-var configDB = require('./config/database.js');
-mongoose.connect(configDB.url);
-
-//Error Handling
+// Check Database status
+mongoose.connection.on('connected', function(){
+  console.log('MongoDB connected: ' + dbConfig.url);
+});
 mongoose.connection.on('error', function(){
-	console.log('MongoDB error: ' + configDB.url);
+  console.log('MongoDB error: ' + dbConfig.url);
 });
 mongoose.connection.on('disconnected', function(){
-	console.log('MongoDB disconnected: ' + configDB.url);
+  console.log('MongoDB disconnected: ' + dbConfig.url);
 });
 
-//Express Setup
+// Passport config
+//require('./config/passport.js')(passport);
+
+// Setup Express
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 
-//Socket.io
+// Routes
+//require('./app/routes/routes.js')(app, passport); TODO add passport
+require('./app/routes/routes.js')(app);
+
+// Start app
 var server = app.listen(port);
-var io = require('socket.io').listen(server);
-require('./app/socket.js')(io);
-
-//Jade
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-//Session
-app.use(session({secret:'hellomynameistevet'}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-
-//Passport
-require('./config/passport')(passport)
-
-//Routes
-require('./app/routes.js')(app, passport);
-
-//Main
-console.log('Server on port ' + port);
+console.log('Compete-Server on port ' + port);

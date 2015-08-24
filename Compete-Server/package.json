@@ -1,5 +1,5 @@
 {
-  "name": "insertnamehere",
+  "name": "CompeteServer",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "latest",
