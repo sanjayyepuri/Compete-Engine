@@ -10,7 +10,7 @@ var morgan      = require('morgan');
 var cookieParser= require('cookie-parser');
 var bodyParser  = require('body-parser');
 var session     = require('express-session');
-var passport    = require('passport');
+var jwt         = require('jsonwebtoken');
 
 // Set up Database
 var dbConfig = require('./config/database.js');

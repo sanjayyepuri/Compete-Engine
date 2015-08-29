@@ -2,7 +2,6 @@ var CompeteEngine = angular.module('CompeteEngine',[]);
 
 function mainController($scope, $http) {
   $scope.formData = {};
-
   $http.get('/api/admin/competitor')
     .success(function(data){
       $scope.competitors = data;
@@ -11,6 +10,7 @@ function mainController($scope, $http) {
     .error(function(data) {
       console.log('Error: ' + data);
     });
+
 
   $scope.createCompetitor = function() {
     $http.post('/api/admin/competitor', $scope.formData)
