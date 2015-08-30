@@ -2,7 +2,7 @@ var CompeteEngine = angular.module('CompeteEngine',[]);
 
 function mainController($scope, $http) {
   $scope.formData = {};
-  $http.get('http://localhost:8080/api/admin/competitor')
+  $http.get('http://localhost:3000/api/admin/competitor')
     .success(function(data){
       $scope.competitors = data;
       console.log(data);
@@ -13,7 +13,7 @@ function mainController($scope, $http) {
 
 
   $scope.createCompetitor = function() {
-    $http.post('http://localhost:8080/api/admin/competitor', $scope.formData)
+    $http.post('http://localhost:3000/api/admin/competitor', $scope.formData)
       .success(function(data){
         $scope.formData = {};
         console.log(data);
@@ -24,7 +24,7 @@ function mainController($scope, $http) {
       });
   }
   $scope.deleteCompetitor = function(id) {
-    $http.delete('http://localhost:8080/api/admin/competitor/' + id)
+    $http.delete('http://localhost:3000/api/admin/competitor/' + id)
       .success(function(data){
         console.log(data);
         $scope.refresh();
@@ -35,7 +35,7 @@ function mainController($scope, $http) {
   }
 
   $scope.refresh = function(){
-    $http.get('http://localhost:8080/api/admin/competitor')
+    $http.get('http://localhost:3000/api/admin/competitor')
       .success(function(data){
         $scope.competitors = data;
         console.log(data);
