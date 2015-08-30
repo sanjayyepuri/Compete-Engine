@@ -1,0 +1,84 @@
+<!doctype html>
+<html ng-app="CompeteEngine">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compete-Engine</title>
+
+  <link href='//fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue_grey-orange.min.css" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body ng-controller="mainController">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header nav">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Compete-Engine</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+        mdl-textfield--floating-label mdl-textfield--align-right">
+        <label class="mdl-button mdl-js-button mdl-button--icon"
+        for="fixed-header-drawer-exp">
+        <i class="material-icons">search</i>
+      </label>
+      <div class="mdl-textfield__expandable-holder">
+        <input class="mdl-textfield__input" type="text" name="sample"
+        id="fixed-header-drawer-exp" />
+      </div>
+    </div>
+  </div>
+</header>
+<div class="mdl-layout__drawer">
+  <span class="mdl-layout-title">Title</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+    <a class="mdl-navigation__link" href="">Link</a>
+  </nav>
+</div>
+<div class="ribbon dark"></div>
+<main class="mdl-layout__content main">
+  <div class="page-content mdl-grid">
+    <div class="mdl-cell mdl-cell--2-col"></div>
+    <div class=" mdl-cell mdl-cell--8-col  mdl-shadow--8dp mdl-card-wide mdl-color--white">
+      <div class="mdl-card__title medium">
+        <h1 class="mdl-card__title-text">Teams</h1>
+      </div>
+      <table class="mdl-data-table mdl-js-data-table" width="100%">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Team ID</th>
+            <th class="mdl-data-table__cell--non-numeric">School</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="competitor in competitors">
+            <td class="mdl-data-table__cell--non-numeric"> {{competitor.teamid}} </td>
+            <td class="mdl-data-table__cell--non-numeric"> {{competitor.school}} </td>
+            <td> {{competitor.teamscore}} </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+
+<script src="/controllers/core.js"></script>
+
+</body>
