@@ -1,6 +1,7 @@
 var Competitor = require('../models/competitor.js');
 var User 			 = require('../models/user.js');
 
+
 exports.createCompetitor = function(req, res){
 	var competitor = new Competitor({
 		teamid	: req.body.teamid,

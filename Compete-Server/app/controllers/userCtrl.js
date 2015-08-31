@@ -1,4 +1,5 @@
 var User = require('../models/user.js');
+
 var Competitor = require('../models/competitor.js');
 var jwt = require('jsonwebtoken');
 
@@ -47,4 +48,9 @@ exports.authenticate = function(req, res) {
 				}
 			}
 		})
+}
+
+exports.createUser = function(req, res){
+	////
+
 }

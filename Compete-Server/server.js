@@ -1,5 +1,6 @@
 var express     = require('express');
 var app         = express();
+
 var port        = process.env.PORT || 3000;
 
 var path        = require('path');
@@ -12,6 +13,8 @@ var bodyParser  = require('body-parser');
 var session     = require('express-session');
 var jwt         = require('jsonwebtoken');
 var cors        = require('cors');
+
+
 
 // Set up Database
 var dbConfig = require('./config/database.js');
@@ -40,6 +43,13 @@ app.use(cors());
 // Routes
 //require('./app/routes/routes.js')(app, passport); TODO add passport
 require('./app/routes/routes.js')(app);
+
+app.use(express.static(__dirname + '/public'));
+
+// Routes
+//require('./app/routes/routes.js')(app, passport); TODO add passport
+require('./app/routes/routes.js')(app);
+
 
 // Start app
 var server = app.listen(port);

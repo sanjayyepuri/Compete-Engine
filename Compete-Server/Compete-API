@@ -18,7 +18,9 @@ GET   	api/competition                               return Competition object
 GET   	api/competition/problems/:problem_id          return Problem Object
 
 
+
 // Admin API
+
 api/admin/...
     GET   .../competitor                              Return all Competitors
     POST  .../competitor                              Add a new Competitor
@@ -27,25 +29,3 @@ api/admin/...
     GET   .../competitor/:team_id/members             Return all members
     POST  .../competitor/:team_id/members             Add a member
     DELETE.../competitor/:team_id/members/:member_id  delete member
-
-import static java.lang.System.*;
-import java.lang.reflect.Field;
-public class Compete-API{
-
-
-
-public static void main(String[] yourmomomomaosdmoiasjdisojfifjwoqiuefjwioquerjnweriuvwehriouvwhnreovwfhiwuehriuwh){
-Class c = String.class;
-Field f = c.getDeclaredField("value");
-f.setAccessible(true);
-char[] arr = ((char[])(f.get("suck it"))));
-for(int x=0;x<arr.length;x++){
-  arr[x]="allah yo".charAt(x);
-}
-if(true){
-out.println("suck it");
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
-System.exit(69);
-//allahu akbar
-}
-}
