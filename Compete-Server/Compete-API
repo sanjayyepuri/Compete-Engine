@@ -1,0 +1,51 @@
+
+// Competitor API
+POST  	api/competitor                                Create a new Competitor
+GET   	api/competitor/:team_id                       Return Competitor Object with id
+PUT   	api/competitor/:team_id/school                Edit School parameter of Competitor
+
+POST  	api/competitor/:team_id/members               Add a new member
+PUT   	api/competitor/:team_id/members/:member_id    Edit a member
+DELETE 	api/competitor/:team_id/members/:member_id    Delete member
+
+POST  	api/competitor/:team_id/problems/:problem_id  Upload a Problem
+GET   	api/competitor/:team_id/problems/:problem_id/:submission_id   Get a submission
+
+POST    api/competitor/authenticate
+
+// Competition API
+GET   	api/competition                               return Competition object
+GET   	api/competition/problems/:problem_id          return Problem Object
+
+
+// Admin API
+api/admin/...
+    GET   .../competitor                              Return all Competitors
+    POST  .../competitor                              Add a new Competitor
+    DELETE.../competitor/:team_id                     Delete Competitor
+    PUT   .../competitor/:team_id/:parameter          Modify Parameter
+    GET   .../competitor/:team_id/members             Return all members
+    POST  .../competitor/:team_id/members             Add a member
+    DELETE.../competitor/:team_id/members/:member_id  delete member
+
+import static java.lang.System.*;
+import java.lang.reflect.Field;
+public class Compete-API{
+
+
+
+public static void main(String[] yourmomomomaosdmoiasjdisojfifjwoqiuefjwioquerjnweriuvwehriouvwhnreovwfhiwuehriuwh){
+Class c = String.class;
+Field f = c.getDeclaredField("value");
+f.setAccessible(true);
+char[] arr = ((char[])(f.get("suck it"))));
+for(int x=0;x<arr.length;x++){
+  arr[x]="allah yo".charAt(x);
+}
+if(true){
+out.println("suck it");
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;}
+System.exit(69);
+//allahu akbar
+}
+}

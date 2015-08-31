@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
+var mongoose	= require('mongoose');
+var bcrypt		= require('bcrypt-nodejs');
 
 var competitorSchema = mongoose.Schema({
-	firstname	: String, 
-	lastname	: String,
-	writtenScore: Number,
-	teamid		: String
+	teamid		: String,
+	school		: String,
+	teamscore	: Number
 });
 
 module.exports = mongoose.model('Competitor', competitorSchema);
