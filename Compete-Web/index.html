@@ -11,8 +11,20 @@
   rel="stylesheet">
   <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.blue_grey-orange.min.css" />
   <link rel="stylesheet" href="styles.css">
+  <style>
+  #view-source {
+    position: fixed;
+    display: block;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+    z-index: 900;
+  }
+  </style>
 </head>
 <body ng-controller="mainController">
+
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header nav">
       <div class="mdl-layout__header-row">
@@ -35,28 +47,32 @@
   </div>
 </header>
 <div class="mdl-layout__drawer">
-  <span class="mdl-layout-title">Title</span>
+  <span class="mdl-layout-title">Compete-Server</span>
   <nav class="mdl-navigation">
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
-    <a class="mdl-navigation__link" href="">Link</a>
   </nav>
 </div>
-<div class="ribbon dark"></div>
-<main class="mdl-layout__content main">
+<div class="ribbon dark">
+
+</div>
+<main class="mdl-layout__content main" id="content">
+
   <div class="page-content mdl-grid">
+
     <div class="mdl-cell mdl-cell--2-col"></div>
     <div class=" mdl-cell mdl-cell--8-col  mdl-shadow--8dp mdl-card-wide mdl-color--white">
       <div class="mdl-card__title medium">
+        <button class=" mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--mini-fab mdl-button--fab mdl-button--colored fixed mdl-shadow--8dp ">
+          <i class="material-icons">add</i>
+        </button>
         <h1 class="mdl-card__title-text">Teams</h1>
       </div>
-      <table class="mdl-data-table mdl-js-data-table" width="100%">
+      <table class="mdl-data-table table mdl-js-data-table" width="85%" align="center">
         <thead>
           <tr>
             <th class="mdl-data-table__cell--non-numeric">Team ID</th>
             <th class="mdl-data-table__cell--non-numeric">School</th>
             <th>Score</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -64,14 +80,13 @@
             <td class="mdl-data-table__cell--non-numeric"> {{competitor.teamid}} </td>
             <td class="mdl-data-table__cell--non-numeric"> {{competitor.school}} </td>
             <td> {{competitor.teamscore}} </td>
+            <td style="padding-top: 8px;"><button ng-click="deleteCompetitor(competitor
+              ._id)" class="button mdl-button mdl-button--accent mdl-js-button mdl-button--icon">
+  <i class="material-icons">clear</i>
+</button></td>
           </tr>
         </tbody>
       </table>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-          Get Started
-        </a>
-      </div>
     </div>
   </div>
 </main>

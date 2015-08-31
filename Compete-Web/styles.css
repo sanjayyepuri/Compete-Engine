@@ -29,3 +29,16 @@ body{
 .medium{
   background-color: #CFD8DC;
 }
+.fixed{
+  position: relative;
+  margin-left: 0px;
+  margin-right: 0px;
+  top: 1.5em;
+  z-index: 1000;
+}
+.table{
+  border: inherit;
+}
+td.button {
+  vertical-align: top;
+}

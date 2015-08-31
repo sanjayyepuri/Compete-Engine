@@ -6,7 +6,6 @@ module.exports = function(app){
   var adminAPI      = require('../api/adminAPI');
   var userController = require('../controllers/userCtrl.js');
 
-
   //app.use('/api/competitor', competitorAPI);
   app.use('/api/admin', adminAPI);
 

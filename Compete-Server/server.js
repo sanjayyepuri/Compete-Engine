@@ -11,6 +11,7 @@ var cookieParser= require('cookie-parser');
 var bodyParser  = require('body-parser');
 var session     = require('express-session');
 var jwt         = require('jsonwebtoken');
+var cors        = require('cors');
 
 // Set up Database
 var dbConfig = require('./config/database.js');
@@ -34,13 +35,7 @@ mongoose.connection.on('disconnected', function(){
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(express.static(__dirname + '/public'));
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
 
 // Routes
 //require('./app/routes/routes.js')(app, passport); TODO add passport
