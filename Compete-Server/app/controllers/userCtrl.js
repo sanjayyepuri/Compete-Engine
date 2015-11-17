@@ -1,23 +1,10 @@
-var User = require('../models/user.js');
-
+var User 			 = require('../models/user.js');
 var Competitor = require('../models/competitor.js');
 var jwt = require('jsonwebtoken');
 
 
-exports.createUser = function(req, res){
-
-	var user = new User({
-		teamid : req.body.teamid,
-		password : req.body.password,
-	});
-	user.save(function(err){
-		if(err)
-			res.send(err);
-		res.json({success: true, message: 'User created.'});
-	});
-
-
-
+exports.createUser = function(req, res) {
+	res.json({message : 'Competitor not created yet.'});
 }
 
 exports.deleteUser = function(req, res) {
@@ -53,9 +40,4 @@ exports.authenticate = function(req, res) {
 				}
 			}
 		})
-}
-
-exports.createUser = function(req, res){
-	////
-
 }
