@@ -42,7 +42,7 @@ app.use(cors());
 
 // Routes
 //require('./app/routes/routes.js')(app, passport); TODO add passport
-require('./app/routes/routes.js')(app);
+//require('./app/routes/routes.js')(app);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -54,3 +54,7 @@ require('./app/routes/routes.js')(app);
 // Start app
 var server = app.listen(port);
 console.log('Compete-Server on port ' + port);
+
+
+//Tests
+require('./tests/models.js').generateAdminAccount();

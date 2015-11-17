@@ -5,24 +5,15 @@ var jwt = require('jsonwebtoken');
 
 //Creates a new User and Competitor
 exports.createUser = function(req, res) {
-	var competitor = new Competitor({
-		teamid 		:	req.body.teamid,
-		school 		: req.body.school,
-		teamscore : 0,
+	var user = new User({
+		teamid 		: req.body.teamid,
+		password 	: req.body.password,
+		level			: req.body.level
 	});
-
-	competitor.save(function(err){
+	user.save(function(err){
 		if(err)
 			res.send(err);
-		var user = new User();
-		user.teamid = req.body.teamid;
-		user.password = user.generateHash(req.body.password);
-
-		user.save(function(err){
-			if(err)
-				res.send(err);
-			res.json({success: true, message: 'User created successfully'});
-		});
+		res.json({success : true, message : 'User created successfully'});
 	})
 }
 // Deletes User and connected Competitor Objects from Database
@@ -47,19 +38,19 @@ exports.authenticate = function(req, res) {
 			teamid: req.body.teamid
 		}, function(err, user){
 			if(err) throw err;
-			if(!user) res.json({success: false, message: "Team not found."});
+			if(!user) res.json({success: false, auth: "Incorrect Team ID"});
 			else if (user){
 				if(!user.validPassword(req.body.password)){
-					res.json({success: false, message: "Incorrect Password"});
+					res.json({success: false, auth: "Incorrect Password"});
 				}
 				else if(user.validPassword(req.body.password)){
-					var token = jwt.sign(user, "erikisgay420blazeit23", {
+					var token = jwt.sign(user, "tokensecret", {
 						expiresInMinutes: 1440
 					});
 
 					res.json({
 						success: true,
-						message: 'Logged in',
+						auth: 'Logged in',
 						token: token
 					});
 				}

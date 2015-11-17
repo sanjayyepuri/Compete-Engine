@@ -1,30 +1,37 @@
 var express = require('express');
 var router = express.Router();
+var jwt    = require('jsonwebtoken');
 
 var Competitor = require('../models/competitor.js');
 var compController = require('../controllers/competitorCtrl.js');
 var userController = require('../controllers/userCtrl.js');
 
-/*router.use(function(req, res, next){
+router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if(token) {
     jwt.verify(token, 'tokensecret', function(err, decoded){
       if(err){
-        return res.json({sucess : false,message: 'Failed to Authenticate.'});
+        return res.json({success : false, auth: 'Failed to Authenticate.', error : err});
       }
       else{
-        req.decoded = decoded;
-        next();
+        req.user = decoded;
+        if(decoded.level === 0)
+          next();
+        else
+          return res.status(403).send({
+            success: false,
+            auth: 'Not an admin'
+          })
       }
     })
   } else {
     return res.status(403).send({
       success: false,
-      message: 'No token provided.'
+      auth: 'No token provided.'
     });
   }
 
-});*/
+});
 
 //Competitor CRUD
 router.get('/competitor', compController.getAll);

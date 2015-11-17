@@ -2,26 +2,41 @@ var Competitor = require('../models/competitor.js');
 var User 			 = require('../models/user.js');
 
 
-exports.createCompetitor = function(req, res){
+exports.createCompetitor = function(req, res) {
 	var competitor = new Competitor({
-		teamid	: req.body.teamid,
-		school	: req.body.school,
-		teamscore: parseInt(req.body.teamscore)
+		teamid 		:	req.body.teamid,
+		school 		: req.body.school,
+		teamscore : 0,
 	});
+
 	competitor.save(function(err){
 		if(err)
 			res.send(err);
-		res.json({message: 'Competitor ' + req.body.teamid + ' created successfully.'});
-	});
+		var user = new User();
+		user.teamid = req.body.teamid;
+		user.password = user.generateHash(req.body.password);
+		user.level = 9;
+		user.competitor = competitor._id;
+		user.save(function(err){
+			if(err)
+				res.send(err);
+			res.json({success: true, message: 'User created successfully'});
+		});
+	})
 }
-
 exports.deleteCompetitor = function(req, res){
-	Competitor.remove({
+	User.remove({
 		_id : req.params.team_id
 	}, function(err){
 		if(err)
 			res.send(err);
-		res.json({message: 'Competitor ' + req.params.team_id + ' has been deleted.'});
+		Competitor.remove({
+			_id : req.params.team_id
+		}, function(err){
+			if(err)
+				res.send(err);
+		});
+		res.json({success: true,  message: 'User deleted' });
 	});
 }
 
@@ -30,27 +45,14 @@ exports.getAll = function(req, res){
 		if(err){
 			res.send(err);
 		}
-
 		res.json(competitors);
 	});
 }
 
 exports.getCompetitor = function(req, res){
-	Competitor.find({_id: req.params.team_id}, function(err, competitor){
+	Competitor.find({_id: req.user.competitor}, function(err, competitor){
 		if(err)
 			res.send(err);
 		res.json(competitor);
-	});
-}
-
-exports.uploadFile = function(req, res){
-	fs.readFile(req.files.javaCode.path, function(err, data){
-		var path = __dirname + "/uploads/"+req.params.team_id+"/"+req.params.problem_id;
-		fs.writeFile(newPath, data, function(err){
-			if(err)
-				res.send(err);
-			else
-				res.send("Uploaded to " + path);
-		});
 	});
 }
