@@ -26,14 +26,16 @@ var userController = require('../controllers/userCtrl.js');
 
 });*/
 
-
+//Competitor CRUD
 router.get('/competitor', compController.getAll);
 router.post('/competitor', compController.createCompetitor);
 router.delete('/competitor/:team_id', compController.deleteCompetitor);
 
+//User CRUD
 router.post('/user', userController.createUser);
 router.delete('/user/:team_id', userController.deleteUser);
 
+//Authentication
 router.post('/authenticate', userController.authenticate);
 
 module.exports = router;

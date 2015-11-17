@@ -1,18 +1,12 @@
-
-//module.exports = function(app, passport){
-
-//module.exports = function(app, passport){ TODO add passport
-
 module.exports = function(app){
-
-  // Connect api routes
-  var competitorAPI = require('../api/competitorAPI');
-  var adminAPI      = require('../api/adminAPI');
-
   var userController = require('../controllers/userCtrl.js');
 
+  // Connect Admin and Competitor APIs TODO make protected
+  var competitorAPI = require('../api/competitorAPI');
+  var adminAPI      = require('../api/adminAPI');
   app.use('/api/competitor', competitorAPI);
   app.use('/api/admin', adminAPI);
 
+  //create public authentication
   app.post('/api/authenticate', userController.authenticate);
 }
