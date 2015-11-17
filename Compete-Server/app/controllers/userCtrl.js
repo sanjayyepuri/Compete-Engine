@@ -3,16 +3,21 @@ var User = require('../models/user.js');
 var Competitor = require('../models/competitor.js');
 var jwt = require('jsonwebtoken');
 
+
 exports.createUser = function(req, res){
+
 	var user = new User({
 		teamid : req.body.teamid,
-		password : req.body.password
+		password : req.body.password,
 	});
 	user.save(function(err){
 		if(err)
 			res.send(err);
 		res.json({success: true, message: 'User created.'});
 	});
+
+
+
 }
 
 exports.deleteUser = function(req, res) {

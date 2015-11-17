@@ -11,18 +11,8 @@ module.exports = function(app){
 
   var userController = require('../controllers/userCtrl.js');
 
-  //app.use('/api/competitor', competitorAPI);
+  app.use('/api/competitor', competitorAPI);
   app.use('/api/admin', adminAPI);
 
   app.post('/api/authenticate', userController.authenticate);
-
-
-  //app.use('/api/competitor', competitorAPI);
-
-  app.use('/api/admin', adminAPI);
-
-
-  app.get('/', function(req, res){
-    res.sendfile('././public/index.html');
-  });
 }

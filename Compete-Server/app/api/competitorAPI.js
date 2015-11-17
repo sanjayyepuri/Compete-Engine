@@ -7,3 +7,8 @@ var userController = require('../controllers/userCtrl.js');
 
 router.post('/user', userController.createUser);
 router.delete('/user/:team_id', userController.deleteUser);
+
+//File uploads test
+router.post('/submission/:team_id/:problem_id', compController.uploadFile);
+
+module.exports = router;

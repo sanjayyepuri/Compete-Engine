@@ -3,7 +3,8 @@ var bcrypt   = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
   teamid   : String,
-  password : String
+  password : String,
+  competitor : [{type: mongoose.Schema.ObjectId, ref: 'Competitor'}]
 });
 userSchema.methods.generateHash = function(password){
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

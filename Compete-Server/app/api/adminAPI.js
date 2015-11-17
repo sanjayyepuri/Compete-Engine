@@ -25,7 +25,7 @@ var userController = require('../controllers/userCtrl.js');
   }
 
 });*/
-var compController = require('../controllers/competitorCtrl.js');
+
 
 router.get('/competitor', compController.getAll);
 router.post('/competitor', compController.createCompetitor);

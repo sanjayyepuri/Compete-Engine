@@ -42,3 +42,15 @@ exports.getCompetitor = function(req, res){
 		res.json(competitor);
 	});
 }
+
+exports.uploadFile = function(req, res){
+	fs.readFile(req.files.javaCode.path, function(err, data){
+		var path = __dirname + "/uploads/"+req.params.team_id+"/"+req.params.problem_id;
+		fs.writeFile(newPath, data, function(err){
+			if(err)
+				res.send(err);
+			else
+				res.send("Uploaded to " + path);
+		});
+	});
+}

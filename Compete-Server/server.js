@@ -13,7 +13,7 @@ var bodyParser  = require('body-parser');
 var session     = require('express-session');
 var jwt         = require('jsonwebtoken');
 var cors        = require('cors');
-
+var fs          = require('fs');
 
 
 // Set up Database
