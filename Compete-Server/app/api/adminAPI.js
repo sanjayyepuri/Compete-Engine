@@ -42,7 +42,4 @@ router.delete('/competitor/:team_id', compController.deleteCompetitor);
 router.post('/user', userController.createUser);
 router.delete('/user/:team_id', userController.deleteUser);
 
-//Authentication
-router.post('/authenticate', userController.authenticate);
-
 module.exports = router;

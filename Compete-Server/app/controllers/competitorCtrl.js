@@ -50,9 +50,11 @@ exports.getAll = function(req, res){
 }
 
 exports.getCompetitor = function(req, res){
-	Competitor.find({_id: req.user.competitor}, function(err, competitor){
-		if(err)
-			res.send(err);
-		res.json(competitor);
-	});
+	Competitor
+		.findOne({_id: req.user._id})
+		.populate('members')
+		.exec(function(err, competitor){
+			if(err) res.send({success : false, error: err});
+			res.json(competitor);
+		});
 }

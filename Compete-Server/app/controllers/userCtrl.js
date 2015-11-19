@@ -44,7 +44,7 @@ exports.authenticate = function(req, res) {
 					res.json({success: false, auth: "Incorrect Password"});
 				}
 				else if(user.validPassword(req.body.password)){
-					var token = jwt.sign(user, "tokensecret", {
+					var token = jwt.sign({_id: user.competitor, level: user.level}, "tokensecret", {
 						expiresInMinutes: 1440
 					});
 

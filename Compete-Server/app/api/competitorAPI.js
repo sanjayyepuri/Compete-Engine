@@ -5,6 +5,7 @@ var router = express.Router();
 var Competitor = require('../models/competitor.js');
 var compController = require('../controllers/competitorCtrl.js');
 var userController = require('../controllers/userCtrl.js');
+var memController = require('../controllers/memberCtrl.js');
 
 router.use(function(req, res, next){
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -33,7 +34,10 @@ router.use(function(req, res, next){
     });
   }
 });
+
 router.get('/', compController.getCompetitor);
+router.post('/member', memController.addMember);
+router.delete('/member/:member_id', memController.removeMember);
 //File uploads test
 //router.post('/submission/:team_id/:problem_name', compController.uploadFile);
 
