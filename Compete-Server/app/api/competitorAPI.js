@@ -40,8 +40,8 @@ router.use(function(req, res, next){
 router.get('/', compController.getCompetitor);
 router.post('/member', memController.addMember);
 router.delete('/member/:member_id', memController.removeMember);
-//File uploads 
+//File uploads
 router.post('/upload',  subController.uploadFile);
-//router.post('/submission/:team_id/:problem_name', compController.uploadFile);
+router.get('/submissions', subController.getSubmissions);
 
 module.exports = router;
