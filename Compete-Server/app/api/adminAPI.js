@@ -39,6 +39,7 @@ router.post('/competitor', compController.createCompetitor);
 router.delete('/competitor/:team_id', compController.deleteCompetitor);
 
 //User CRUD
+router.get('/user', userController.getAll);
 router.post('/user', userController.createUser);
 router.delete('/user/:team_id', userController.deleteUser);
 

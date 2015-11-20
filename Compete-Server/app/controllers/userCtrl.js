@@ -3,6 +3,13 @@ var Competitor = require('../models/competitor.js');
 var jwt = require('jsonwebtoken');
 
 
+exports.getAll = function(req, res) {
+	User.find(function(err, users){
+		if(err) res.send({success : false, error : err});
+		res.json(users);
+	});
+}
+
 //Creates a new User and Competitor
 exports.createUser = function(req, res) {
 	var user = new User({
@@ -45,7 +52,7 @@ exports.authenticate = function(req, res) {
 				}
 				else if(user.validPassword(req.body.password)){
 					var token = jwt.sign({_id: user.competitor, level: user.level}, "tokensecret", {
-						expiresInMinutes: 1440
+						expiresIn: 86400
 					});
 
 					res.json({

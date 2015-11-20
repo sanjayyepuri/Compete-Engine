@@ -35,9 +35,11 @@ mongoose.connection.on('disconnected', function(){
 //require('./config/passport.js')(passport);
 
 // Setup Express
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(cors());
 
 // Routes
