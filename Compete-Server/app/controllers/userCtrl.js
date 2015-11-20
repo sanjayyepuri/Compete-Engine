@@ -6,7 +6,7 @@ var jwt = require('jsonwebtoken');
 exports.getAll = function(req, res) {
 	User.find(function(err, users){
 		if(err) res.send({success : false, error : err});
-		res.json(users);
+		res.json({success : true, data : users});
 	});
 }
 

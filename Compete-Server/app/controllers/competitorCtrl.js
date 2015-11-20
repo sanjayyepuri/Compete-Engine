@@ -45,7 +45,7 @@ exports.getAll = function(req, res){
 		if(err){
 			res.send(err);
 		}
-		res.json(competitors);
+		res.json({success : true, data : competitors});
 	});
 }
 
@@ -55,6 +55,6 @@ exports.getCompetitor = function(req, res){
 		.populate('members')
 		.exec(function(err, competitor){
 			if(err) res.send({success : false, error: err});
-			res.json(competitor);
+			res.json({success : true, data : competitor});
 		});
 }

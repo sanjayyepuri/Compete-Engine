@@ -8,7 +8,7 @@ var formidable  = require('formidable');
  var uploadsfolder = '/Users/sanjayyepuri/Documents/CompeteEngine/fileuploads/';
 
 
-exports.uploadFile = function(req, res){
+/*exports.uploadFile = function(req, res){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
     if(!files.upload){
@@ -17,7 +17,7 @@ exports.uploadFile = function(req, res){
     if(err) res.send(err);
 
     var submission = new Submission({
-      team_id : req.user._id, 
+      team_id : req.user._id,
       problemid : fields.problemid,
     });
 
@@ -36,6 +36,40 @@ exports.uploadFile = function(req, res){
       });
     });
   });
+}*/
+exports.getSubmissions = function(req, res){
+  Submissions.find({team_id: req.user._id}, function(err, data){
+    if(err) res.send({success : false, error : err});
+
+    res.json({success : true, data : data});
+
+  })
+}
+
+exports.uploadFile = function(req, res){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files){
+    if(err)res.send({success: false, error : err});
+    if(!files.upload) res.send({success : false, message : 'Please Select a File.'});
+
+    fs.readFile(files.upload.path, 'utf-8', function(err, data){
+      if(err) res.send({success : false, error : err});
+      var submission = new Submission({
+        team_id   : req.user._id,
+        problemid : fields.problemid,
+        data      : data+'//'+req.user._id,
+        status    : 'In Queue'
+      });
+      submission.save(function(err) {
+        if(err)res.send({success : false, error : err});
+        Competitor.update({_id: req.user._id}, {$push : {submissions : submission._id}},
+          function(err){
+            if(err) res.send({success : false, error: err});
+            res.json({success : true, message : 'Submission uploaded'});
+          });
+      });
+    });
+  });
 }
 
 function createPath(req, fields){
@@ -45,7 +79,4 @@ function createPath(req, fields){
   if(!fs.existsSync(uploadsfolder+req.user._id+'/'+fields.problemid)){
     fs.mkdir(uploadsfolder+req.user._id+'/'+fields.problemid);
   }
-
-
 }
-
