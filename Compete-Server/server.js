@@ -59,4 +59,7 @@ console.log('Compete-Server on port ' + port);
 
 
 //Tests
-require('./tests/models.js').generateAdminAccount();
+var tests = require('./tests/models.js');
+tests.generateAdminAccount();
+//tests.generateCompetitors();
+

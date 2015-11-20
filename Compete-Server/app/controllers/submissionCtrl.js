@@ -38,10 +38,9 @@ var formidable  = require('formidable');
   });
 }*/
 exports.getSubmissions = function(req, res){
-  Submissions.find({team_id: req.user._id}, function(err, data){
+  Submission.find({team_id: req.user._id}, function(err, data){
     if(err) res.send({success : false, error : err});
-
-    res.json({success : true, data : data});
+    else res.json({success : true, data : data});
 
   })
 }
@@ -62,11 +61,13 @@ exports.uploadFile = function(req, res){
       });
       submission.save(function(err) {
         if(err)res.send({success : false, error : err});
-        Competitor.update({_id: req.user._id}, {$push : {submissions : submission._id}},
-          function(err){
-            if(err) res.send({success : false, error: err});
-            res.json({success : true, message : 'Submission uploaded'});
-          });
+        else {
+          Competitor.update({_id: req.user._id}, {$push : {submissions : submission._id}},
+            function(err){
+              if(err) res.send({success : false, error: err});
+              res.json({success : true, message : 'Submission uploaded'});
+            });
+        }
       });
     });
   });

@@ -25,6 +25,13 @@ exports.addMember = function(req, res){
   });
 }
 
+exports.getMembers = function(req, res){
+  Member.find({team_id : req.user._id}, function(err, members){
+    if(err) res.send({success : false, error : err});
+    res.json({success : true, error : err});
+  });
+}
+
 exports.removeMember = function(req, res){
     Member.remove({_id : req.params.member_id}, function(err){
       if(err){
