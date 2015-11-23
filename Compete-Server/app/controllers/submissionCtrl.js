@@ -44,7 +44,7 @@ exports.getSubmissions = function(req, res){
 
   })
 }
-
+/*
 exports.uploadFile = function(req, res){
   var form = new formidable.IncomingForm();
   form.parse(req, function(err, fields, files){
@@ -69,8 +69,51 @@ exports.uploadFile = function(req, res){
             });
         }
       });
+    }); 
+  });
+}
+*/
+
+var Grid = require('gridfs-stream');
+var mongoose = require('mongoose');
+var GridFS = Grid(mongoose.connection.db, mongoose.mongo);
+
+exports.uploadFile = function(req, res){
+  var form = new formidable.IncomingForm();
+  form.parse(req, function(err, fields, files){
+    if(err) res.send({success : false, error : err});
+    var submission = new Submission({
+      team_id : req.user._id,
+      problemid : fields.problemid,
+      status : 'In Queue',
+    });
+    var writestream = GridFS.createWriteStream({
+      filename : submission.id,
+    });
+    fs.createReadStream(files.upload.path).pipe(writestream);
+    //sres.send({success : true})
+    submission.save(function(err){
+        if(err) return res.send({success : false, error :err});
+        else {
+          Competitor.update({_id: req.user._id}, {$push : {submissions : submission._id}},
+            function(err){
+              if(err) res.send({success : false, error: err});
+              res.json({success : true, message : 'Submission uploaded'});
+            });
+        }
     });
   });
+}
+
+exports.getFile = function(req, res){
+  var readstream = GridFS.createReadStream({
+    filename : mongoose.Types.ObjectId(req.body.filename)//TODO : make filename 
+  });
+  readstream.on('error', function(err){
+    res.send(500, err);
+  })
+  var data;
+  res.send({success: true, data : data});
 }
 
 function createPath(req, fields){
