@@ -1,0 +1,43 @@
+{
+  "name": "Compete-React",
+  "version": "0.0.1",
+  "description": "Web based front end for Compete-Engine",
+  "main": "js/app.js",
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "classnames": "*",
+    "flux": "*",
+    "jest-cli": "^0.8.2",
+    "keymirror": "*",
+    "material-ui": "*",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.7",
+    "reactify": "^1.1.1",
+    "uglify-js": "^2.6.2",
+    "underscore": "^1.8.3",
+    "watchify": "^3.7.0"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "envify": "*",
+    "jest-cli": "*",
+    "reactify": "*",
+    "uglify-js": "*",
+    "watchify": "*"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest"
+  },
+  "author": "Sanjay Yepuri",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": "./js"
+  }
+}
