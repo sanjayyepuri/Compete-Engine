@@ -18,6 +18,9 @@ var AdminStore = _.extend({}, EventEmitter.prototype, {
    },
    removeChangeListener : function(callback) {
        this.removeListener('change', callback);
+   },
+   getTeams: function(){
+       return _teams;
    }
 });
 
@@ -25,7 +28,7 @@ AppDispatcher.register(function(payload){
     var action = payload.action;
     
     switch (action.actionType) {
-        case CompeteConstants.GET_COMPETITORS:
+        case CompeteConstants.GET_TEAMS:
             loadTeams(action.data);
             break;
     

@@ -2,9 +2,9 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var CompeteConstants = require('../constants/CompeteConstants');
 
 var CompeteActions = {
-    getAllCompetitors: function(data) {
+    getTeams: function(data) {
         AppDispatcher.handleAction({
-            actionType: CompeteConstants.GET_COMPETITORS,
+            actionType: CompeteConstants.GET_TEAMS,
             data: data
         });
     },
