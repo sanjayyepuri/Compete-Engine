@@ -4,12 +4,15 @@
   "description": "Web based front end for Compete-Engine",
   "dependencies": {
     "flux": "*",
+    "jwt-decode": "^1.5.1",
     "keymirror": "^0.1.1",
     "material-ui": "*",
     "object-assign": "^4.0.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "react-tap-event-plugin": "^0.2.1"
+    "react-tap-event-plugin": "^0.2.1",
+    "superagent": "^1.8.0-beta.2",
+    "when": "^3.7.7"
   },
   "scripts": {
     "start": "gulp"

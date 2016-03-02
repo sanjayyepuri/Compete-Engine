@@ -5,9 +5,12 @@ var _ = require('underscore');
 
 var _teams = {};
 
+
 function loadTeams(data){
     _teams = data;
 }
+
+
 
 var AdminStore = _.extend({}, EventEmitter.prototype, {
    emitChange: function() {
@@ -31,7 +34,6 @@ AppDispatcher.register(function(payload){
         case CompeteConstants.GET_TEAMS:
             loadTeams(action.data);
             break;
-    
         default:
             return true;
     }

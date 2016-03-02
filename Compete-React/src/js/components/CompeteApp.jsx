@@ -5,11 +5,25 @@ import AppBar from 'material-ui/lib/app-bar';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import DarkTheme from 'material-ui/lib/styles/raw-Themes/dark-raw-theme';
 
+import TeamList from './TeamList';
+import Login from './login';
 
 
 function getAppState() {
     return {
-        teams: AdminStore.getTeams(),
+        teams: 
+        [
+            {
+                teamid : "Team 1",
+                school : "Seven Lakes",
+                teamscore : 21
+            },
+            {
+                teamid : "Team 2",
+                school : "Seven Lakes",
+                teamscore : 22
+            },
+        ]
     };
 }
 
@@ -35,8 +49,13 @@ var CompeteApp = React.createClass({
     },
     
     render: function(){
+        console.log(this.state.teams);
         return (
-            <AppBar title="Compete Engine" />
+            <div>
+                <AppBar title="Compete Engine" />
+                <Login />
+                <TeamList teams={this.state.teams}/>
+            </div>
         );
     },
     

@@ -8,6 +8,12 @@ var CompeteActions = {
             data: data
         });
     },
+    authenticate: function(data) {
+        AppDispatcher.handleAction({
+            actionType: CompeteConstants.AUTHENTICATE,
+            data: data
+        });
+    }
     
 }
 
