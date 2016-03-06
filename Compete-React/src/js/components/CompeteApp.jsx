@@ -1,6 +1,7 @@
 import React from 'react';
-import AdminStore from '../stores/AdminStore';
 import AppBar from 'material-ui/lib/app-bar';
+import FlatButton from 'material-ui/lib/flat-button';
+
 
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import DarkTheme from 'material-ui/lib/styles/raw-Themes/dark-raw-theme';
@@ -8,23 +9,14 @@ import DarkTheme from 'material-ui/lib/styles/raw-Themes/dark-raw-theme';
 import TeamList from './TeamList';
 import Login from './login';
 
+import Admin from '../services/AdminService';
+import AdminStore from '../stores/AdminStore';
+import AuthStore from '../stores/LoginStore';
+
+
 
 function getAppState() {
-    return {
-        teams: 
-        [
-            {
-                teamid : "Team 1",
-                school : "Seven Lakes",
-                teamscore : 21
-            },
-            {
-                teamid : "Team 2",
-                school : "Seven Lakes",
-                teamscore : 22
-            },
-        ]
-    };
+    return {teams: AdminStore.getTeams()};
 }
 
 var CompeteApp = React.createClass({
@@ -47,14 +39,20 @@ var CompeteApp = React.createClass({
     componentWillUnmount: function() {
         AdminStore.removeChangeListener(this._onChange);
     },
+    getTeams: function(){
+      Admin.getTeams(AuthStore.getToken());
+    },
     
     render: function(){
-        console.log(this.state.teams);
+        
+        var display;
+        
         return (
             <div>
                 <AppBar title="Compete Engine" />
-                <Login />
                 <TeamList teams={this.state.teams}/>
+                <FlatButton label="Primary" primary={true} onClick={this.getTeams}/>
+                <Login />
             </div>
         );
     },

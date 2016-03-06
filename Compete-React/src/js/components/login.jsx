@@ -1,5 +1,5 @@
 import React from 'react';
-import CompeteAPI from '../utils/CompeteAPI';
+import Auth from '../services/AuthService';
 
 function getState() {
     return {
@@ -13,7 +13,7 @@ var login = React.createClass({
       }, 
       login: function(e) {
           e.preventDefault();
-          CompeteAPI.getAuth(this.state.team, this.state.password);
+          Auth.authenticate(this.state.team, this.state.password);
       }, 
       render: function() {
           return (

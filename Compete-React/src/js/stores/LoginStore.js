@@ -32,10 +32,11 @@ AppDispatcher.register(function(payload){
    
    switch (action.actionType) {
        case CompeteConstants.AUTHENTICATE:
-           login(action.data);
+           login(action.data); 
            break;
    
        default:
            break;
    } 
 });
+module.exports = LoginStore;
