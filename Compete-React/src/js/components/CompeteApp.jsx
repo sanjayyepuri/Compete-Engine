@@ -3,12 +3,6 @@ import AppBar from 'material-ui/lib/app-bar';
 import FlatButton from 'material-ui/lib/flat-button';
 
 
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import DarkTheme from 'material-ui/lib/styles/raw-Themes/dark-raw-theme';
-
-import TeamList from './TeamList';
-import Login from './login';
-
 import Admin from '../services/AdminService';
 import AdminStore from '../stores/AdminStore';
 import AuthStore from '../stores/LoginStore';
@@ -20,15 +14,6 @@ function getAppState() {
 }
 
 var CompeteApp = React.createClass({
-    childContextTypes : {
-        muiTheme : React.PropTypes.object,
-    },
-    getChildContext () {
-        return {
-            muiTheme : ThemeManager.getMuiTheme(DarkTheme),
-        };
-    },
-    
     getInitialState: function(){
         return getAppState();
     },
@@ -50,9 +35,6 @@ var CompeteApp = React.createClass({
         return (
             <div>
                 <AppBar title="Compete Engine" />
-                <TeamList teams={this.state.teams}/>
-                <FlatButton label="Primary" primary={true} onClick={this.getTeams}/>
-                <Login />
             </div>
         );
     },

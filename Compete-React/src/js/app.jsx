@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import CompeteApp from './components/CompeteApp';
+import CompeteRouter from 'CompeteRouter';
 
 ReactDom.render(
-    <CompeteApp />,
+    <CompeteRouter />,
     document.getElementById('app')
 );
