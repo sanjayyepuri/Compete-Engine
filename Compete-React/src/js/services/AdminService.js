@@ -1,8 +1,11 @@
 var CompeteActions = require('../actions/CompeteActions');
 var request = require('superagent');
 
+var AuthStore = require('../stores/LoginStore');
+
 module.exports = {
-    getTeams : function(jwt){
+    getTeams : function(){
+        var jwt = AuthStore.getToken();
         console.log(jwt);
         request.get('http://localhost:8080/api/admin/competitor')
         .set('x-access-token', jwt)

@@ -2,10 +2,11 @@ import React from 'react';
 
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import DarkTheme from 'material-ui/lib/styles/raw-Themes/dark-raw-theme';
-import TeamList from './TeamList';
+import Admin from './Admin';
 import CompeteApp from './CompeteApp';
+import Login from './login';
  
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, Link, hashHistory } from 'react-router'
 
 
 
@@ -20,9 +21,9 @@ export default React.createClass({
     },
     render(){
         return(
-            <Router history={browserHistory}>
+            <Router history={hashHistory}>
                  <Route path="/" component={CompeteApp}>
-                    <Route path="teams" component={TeamList}/>
+                    <Route path="admin" component={Admin}/>
                     <Route path="login" component={Login}/>
                  </Route>                                 
             </Router>

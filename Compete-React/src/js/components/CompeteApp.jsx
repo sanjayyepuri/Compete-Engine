@@ -1,48 +1,52 @@
 import React from 'react';
 import AppBar from 'material-ui/lib/app-bar';
-import FlatButton from 'material-ui/lib/flat-button';
+import LeftNav from 'material-ui/lib/left-nav';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import { Router, Route, Link, hashHistory } from 'react-router';
 
-
-import Admin from '../services/AdminService';
-import AdminStore from '../stores/AdminStore';
-import AuthStore from '../stores/LoginStore';
-
-
-
-function getAppState() {
-    return {teams: AdminStore.getTeams()};
+const style = {
+ 
 }
 
-var CompeteApp = React.createClass({
-    getInitialState: function(){
-        return getAppState();
+export default  React.createClass({
+    getInitialState(){
+        return {leftnav: false};
     },
-    
-    componentDidMount: function(){
-        AdminStore.addChangeListener(this._onChange);
+    handleToggle() {
+        console.log('HI')
+        this.setState({leftnav: !this.state.leftnav});
     },
-    componentWillUnmount: function() {
-        AdminStore.removeChangeListener(this._onChange);
-    },
-    getTeams: function(){
-      Admin.getTeams(AuthStore.getToken());
-    },
-    
-    render: function(){
-        
-        var display;
-        
+    render() {
+        var menuItems = [
+            {id: 1,route : '/admin', text: 'Admin'},
+            {id: 2,route : '/login', text:'Login'}
+        ];
         return (
             <div>
-                <AppBar title="Compete Engine" />
+                <AppBar
+                    onLeftIconButtonTouchTap={this.handleToggle}
+                    title="Compete Engine"
+                    />
+                <LeftNav 
+                    docked={false} 
+                    open={this.state.leftnav}
+                    onRequestChange={open => this.setState({leftnav:open})}
+                >
+                    {menuItems.map(link => 
+                        <MenuItem
+                            key={link.id}
+                            linkButton
+                            containerElement={<Link to={link.route}/>}
+                            primaryText={link.text}
+                        />
+                            
+                        
+                    )}
+                </LeftNav>
+                <div style={style} >
+                    {this.props.children}
+                </div>
             </div>
         );
     },
-    
-    _onChange: function(){
-        this.setState(getAppState());
-    }
-    
 });
-
-module.exports = CompeteApp;
