@@ -34,7 +34,8 @@ export default React.createClass({
         );
     },
     _onChange(){
-        return getAppState();
+        console.log(this.state.teams)
+        this.setState(getAppState);
     }
     
 });
