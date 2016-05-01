@@ -1,0 +1,37 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Server",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/Compete-Server/server.js",
+			"stopOnEntry": false,
+			"args": [],
+			"cwd": "${workspaceRoot}",
+			"preLaunchTask": null,
+			"runtimeExecutable": null,
+			"runtimeArgs": [
+				"--nolazy"
+			],
+			"env": {
+				"NODE_ENV": "development"
+			},
+			"externalConsole": false,
+			"sourceMaps": false,
+			"outDir": null
+		},
+		{
+			"name": "Web",
+			"type": "node",
+			"request": "launch",
+			"program": "${workspaceRoot}/Compete-React/node_modules/gulp/bin/gulp.js",
+			"stopOnEntry": false,
+			"cwd": "${workspaceRoot}/Compete-React",
+			"runtimeExecutable": null,
+			"args": [],
+			"env": {}
+		}
+		
+	]
+}

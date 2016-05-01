@@ -1,22 +1,23 @@
 var express = require('express');
 var router = express.Router();
-var jwt    = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 var Competitor = require('../models/competitor.js');
 var compController = require('../controllers/competitorCtrl.js');
 var userController = require('../controllers/userCtrl.js');
 
-router.use(function(req, res, next){
+router.use(function (req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
-  if(token) {
-    jwt.verify(token, 'tokensecret', function(err, decoded){
-      if(err){
-        return res.json({success : false, auth: 'Failed to Authenticate.', error : err});
+  if (token) {
+    jwt.verify(token, 'tokensecret', function (err, decoded) {
+      if (err) {
+        return res.json({ success: false, auth: 'Failed to Authenticate.', error: err });
       }
-      else{
-        req.user = decoded;
-        if(decoded.level === 0)
+      else {
+        if (decoded.level === 0) {
+          req.user = decoded;
           next();
+        }
         else
           return res.status(403).send({
             success: false,

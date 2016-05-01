@@ -28,7 +28,6 @@ function getState() {
     };
 }
 var login = React.createClass({
-      mixins:[LinkedStateMixin],
       getInitialState: function(){
           return getState();
       }, 
