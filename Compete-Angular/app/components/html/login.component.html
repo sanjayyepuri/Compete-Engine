@@ -1,11 +1,12 @@
 <div class="row" style="margin-top: 2%">
     <div class="one-third column">
         <h2 class="pane-title">Login</h2>
-        <form style="margin-top: 2%">
+        <form [ngFormModel]="form" (submit)="onSubmit(form.value)" style="margin-top: 2%">
             <label for="teamid">Team ID</label>
-            <input class="form-component u-full-width" type="text" id="teamid" placeholder="Team ID">
+            <input class="form-component u-full-width" type="text" ngControl="teamid" placeholder="Team ID">
             <label for="password">Password</label>
-            <input class="form-component u-full-width" type="password" id="password" placeholder="password">
+            <input class="form-component u-full-width" type="password" ngControl="password" placeholder="password">
+            <div *ngIf="error" class="error">Check your password</div>
             <label class="remember-me">
                 <input type="checkbox">
                 <span class="label-body">Remember me.</span>

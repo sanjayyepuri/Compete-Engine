@@ -16,6 +16,9 @@ body{
 .pane{
    border-bottom: 1px solid  #4b4b4b;
 }
+.error{
+  color: #E55934;
+}
 /*Skeleton Website navbar css
 -------------------------------------------------- */
   .navbar + .docs-section {
