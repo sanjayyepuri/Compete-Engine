@@ -37,9 +37,7 @@ mongoose.connection.on('disconnected', function () {
 // Setup Express
 app.use(morgan('tiny'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(bodyParser());
 app.use(cors({ credentials: false }));
 
 // Routes
