@@ -1,10 +1,11 @@
 module.exports = function (server) {
     var io = require('socket.io')(server);
-    var date = new Date();
+
 
     io.on('connection', function (socket) {
+        var date = new Date();
         console.log(date);
-        socket.emit('time', { time: date.toDateString() });
+        socket.emit('time', { time: date.getTime() });
     })
     var countdown = 10;
     //setInterval(function() {
@@ -12,6 +13,4 @@ module.exports = function (server) {
     //    io.sockets.emit('timer', {countdown: countdown});
     //     console.log(countdown);
     //}, 1000);
-    
-
 }
