@@ -1,6 +1,8 @@
-import { Component } from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Component, OnInit } from 'angular2/core';
+import { NgIf } from 'angular2/common';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router } from 'angular2/router';
 import { HTTP_PROVIDERS }    from 'angular2/http';
+import { JwtHelper, tokenNotExpired } from 'angular2-jwt';
 
 import { LoginComponent } from './login.component';
 import { DashboardComponent } from './dashboard.component';
@@ -8,25 +10,32 @@ import { CompeteStandingsComponent } from './compete-standings.component';
 import { ClarificationComponent } from './clarification.component';
 
 
-import { TeamsService } from '../services/teams.service'
+import { TeamsService } from '../services/teams.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/components/html/app.component.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [ROUTER_PROVIDERS, HTTP_PROVIDERS, TeamsService]
+    providers:
+    [
+      ROUTER_PROVIDERS,
+      HTTP_PROVIDERS,
+      TeamsService,
+      AuthenticationService
+    ]
 })
 @RouteConfig([
     {
         path: '/login',
         name: 'Login',
-        component: LoginComponent
+        component: LoginComponent,
+        useAsDefault: true
     },
     {
         path: '/dashboard',
         name: 'Dashboard',
         component: DashboardComponent,
-        useAsDefault: true
     },
     {
         path: '/standings',
@@ -41,4 +50,17 @@ import { TeamsService } from '../services/teams.service'
 ])
 export class AppComponent {
     title = 'Compete Engine';
+    isAuth: boolean;
+    team: any;
+    constructor(private _teamService: TeamsService, private _router: Router, private _auth: AuthenticationService){
+      _router.subscribe((val) => {
+        this.team = _auth.getThisTeam()
+        this.isAuth = _auth.isLoggedin();
+      })
+    }
+    logout(){
+      this._auth.logout();
+      this._router.navigate(['Login']);
+    }
+
 }

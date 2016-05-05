@@ -9,7 +9,7 @@ import { AuthenticationService } from '../services/authentication.service';
     templateUrl: 'app/components/html/login.component.html',
     directives: [FORM_DIRECTIVES, NgIf],
     providers: [AuthenticationService]
-    
+
 })
 export class LoginComponent {
     form: ControlGroup;
@@ -20,11 +20,14 @@ export class LoginComponent {
             password: ['', Validators.required]
         });
     }
-    
+
     onSubmit(value: any){
         this.auth.login(value.teamid, value.password)
         .subscribe(
-            (token: any) => this._router.navigate(['Dashboard']),
+            (token: any) => {
+              console.log(token);
+              this._router.navigate(['Dashboard'])
+            },
             () => {this.error = true; }
         );
     }

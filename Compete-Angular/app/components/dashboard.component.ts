@@ -1,10 +1,10 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { CanActivate } from 'angular2/router';
 
 import { CompeteStandingsComponent } from './compete-standings.component';
 import { ClockComponent } from './clock.component';
 import { AuthenticationService } from '../services/authentication.service';
-import { tokenNotExpired  } from 'angular2-jwt';
-import { CanActivate } from 'angular2/router';
 
 @Component({
     selector: 'dashboard',
@@ -13,6 +13,12 @@ import { CanActivate } from 'angular2/router';
 })
 
 @CanActivate(() => tokenNotExpired())
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
+
+
+  ngOnInit(){
+
+  }
+
 
 }

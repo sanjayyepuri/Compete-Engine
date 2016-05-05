@@ -4,15 +4,15 @@
   <base href="/">
   <title>Compete-Engine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-   <!-- Favicon
-         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-      <link rel="icon" type="image/png" href="img/favicon.png">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
 
   <!-- FONT
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
   <!-- CSS
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="stylesheet" href="css/main.css">
@@ -32,22 +32,23 @@
 
   <!-- 2. Configure SystemJS -->
   <script>
-    System.config({
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          },
-          "angular2-jwt": {
-            "defaultExtension": 'js'
-          }
-        },
-        map: {
-          "angular2-jwt": "node_modules/angular2-jwt"
-        }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
+  System.config({
+
+    packages: {
+      app: {
+        format: 'register',
+        defaultExtension: 'js'
+      },
+      'angular2-jwt': {
+        defaultExtension: 'js'
+      }
+    },
+    map: {
+      'angular2-jwt': 'node_modules/angular2-jwt/angular2-jwt.js'
+    }
+  });
+  System.import('app/main')
+  .then(null, console.error.bind(console));
   </script>
 </head>
 

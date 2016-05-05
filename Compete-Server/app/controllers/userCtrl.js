@@ -41,7 +41,7 @@ exports.deleteUser = function (req, res) {
 }
 
 exports.authenticate = function (req, res) {
-	
+
 	User.findOne({
 		teamid: req.body.teamid
 	}, function (err, user) {
@@ -52,7 +52,7 @@ exports.authenticate = function (req, res) {
 				res.json({ success: false, auth: "Incorrect Password" });
 			}
 			else if (user.validPassword(req.body.password)) {
-				var token = jwt.sign({ _id: user.competitor, level: user.level }, "tokensecret", {
+				var token = jwt.sign({ _id: user.competitor, level: user.level, teamid: user.teamid }, "tokensecret", {
 					expiresIn: 86400
 				});
 
@@ -65,4 +65,3 @@ exports.authenticate = function (req, res) {
 		}
 	})
 }
-
