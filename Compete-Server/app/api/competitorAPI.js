@@ -44,6 +44,7 @@ router.delete('/member/:member_id', memController.removeMember);
 router.post('/upload', subController.uploadFile);
 router.get('/submissions', subController.getSubmissions);
 
+router.get('/teams', compController.getAll);
 
 router.post('/file', subController.getFile);
 

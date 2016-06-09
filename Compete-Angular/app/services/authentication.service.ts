@@ -1,6 +1,6 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Http, Response, Headers } from 'angular2/http';
+import { Http, Response, Headers } from '@angular/http';
 import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
@@ -8,7 +8,10 @@ export class AuthenticationService{
     token: string;
 
     constructor(private _http : Http){
-        this.token = localStorage.getItem('token');
+        if(!localStorage.getItem('id_token')){
+          localStorage.setItem('id_token', 'undefined');
+        }
+        this.token = localStorage.getItem('id_token');
     }
 
     login(teamid: String, password: String){
@@ -32,7 +35,6 @@ export class AuthenticationService{
             console.log(JSON.stringify(data));
         })
     }
-
     logout() {
         console.log('LOGOUT');
         this.token = undefined;
@@ -41,14 +43,24 @@ export class AuthenticationService{
         return Observable.of(true);
     }
     isLoggedin() {
-        console.log(localStorage.getItem('id_token') !== 'undefined');
         return localStorage.getItem('id_token') !== 'undefined';
     }
     getThisTeam(){
-      console.log(this.isLoggedin());
       if(this.isLoggedin()){
         return new JwtHelper().decodeToken(localStorage.getItem('id_token'));
       }
       return 'undefined';
+    }
+    getToken(){
+      var token: string = localStorage.getItem('id_token');
+      if(token) return token;
+    }
+    getHeader(){
+      var header = new Headers();
+      if(this.getToken()){
+        header.append('x-access-token', this.getToken());
+        return header;
+      }
+
     }
 }
