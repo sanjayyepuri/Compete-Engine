@@ -38,7 +38,7 @@ mongoose.connection.on('disconnected', function () {
 app.use(morgan('tiny'));
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(cors({ credentials: false }));
+app.use(cors());
 
 // Routes
 //require('./app/routes/routes.js')(app, passport); TODO add passport
@@ -63,4 +63,3 @@ require('./app/realtime/countdown.js')(server);
 var tests = require('./tests/models.js');
 tests.generateAdminAccount();
 //tests.generateCompetitors();
-

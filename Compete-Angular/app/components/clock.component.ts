@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
 declare var io: any;
 
@@ -10,7 +10,7 @@ export class ClockComponent implements OnInit {
     socket: any;
     time: string;
     countdown: any;
-    
+
     constructor() {
         this.socket = io.connect('http://localhost:8080/');
         this.countdown= 'Not Started'

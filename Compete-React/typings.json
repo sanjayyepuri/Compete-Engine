@@ -1,8 +1,0 @@
-{
-  "ambientDependencies": {
-    "flux": "github:DefinitelyTyped/DefinitelyTyped/flux/flux.d.ts#957c41c644b150a1ecba4377aa2c6f7f6442eef0",
-    "material-ui": "github:DefinitelyTyped/DefinitelyTyped/material-ui/material-ui.d.ts#44d672fd37ffe1ffabf9cec3bbadfbecedf39006",
-    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#f407264835650f5f38d4bb2c515a79e7a835916b",
-    "underscore": "github:DefinitelyTyped/DefinitelyTyped/underscore/underscore.d.ts#669e1b73f18ea6ea15bfbfbbdad6501bfa0ff340"
-  }
-}
