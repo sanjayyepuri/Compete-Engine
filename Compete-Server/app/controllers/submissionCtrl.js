@@ -41,6 +41,8 @@ exports.uploadFile = function (req, res) {
             if (err) res.send({ success: false, error: err });
             res.json({ success: true, message: 'Submission uploaded' });
           });
+
+          
       }
     });
 
