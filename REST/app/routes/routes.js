@@ -9,5 +9,5 @@ module.exports = function (app) {
 
   //Public routes
   app.post('/api/authenticate', userController.authenticate);
-  app.post('/api/signup', compController.createCompetitor);
+  //app.post('/api/signup', compController.createCompetitor);
 }

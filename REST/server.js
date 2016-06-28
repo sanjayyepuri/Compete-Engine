@@ -37,7 +37,8 @@ mongoose.connection.on('disconnected', function () {
 // Setup Express
 app.use(morgan('tiny'));
 app.use(cookieParser());
-app.use(bodyParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
@@ -60,6 +61,6 @@ require('./app/realtime/countdown.js')(server);
 
 
 //Tests
-var tests = require('./tests/models.js');
+var tests = require('./test/models.js');
 tests.generateAdminAccount();
 //tests.generateCompetitors();

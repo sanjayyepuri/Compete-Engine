@@ -1,0 +1,36 @@
+{
+  "name": "CompeteServer",
+  "version": "0.0.0",
+  "description": "A RESTful server for Computer Science Tournaments.",
+  "author": "sanjay.yepuri@gmail.com",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "*",
+    "connect-flash": "*",
+    "cookie-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "express-session": "*",
+    "formidable": "*",
+    "gridfs-stream": "*",
+    "jackrabbit": "*",
+    "jsonwebtoken": "*",
+    "method-override": "*",
+    "mongoose": "*",
+    "morgan": "*",
+    "multer": "*",
+    "nodemon": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "socket.io": "*",
+    "timer-stopwatch": "*"
+  },
+  "devDependencies": {
+    "should": "^9.0.2",
+    "supertest": "^1.2.0"
+  }
+}

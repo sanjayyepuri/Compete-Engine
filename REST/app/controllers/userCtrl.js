@@ -41,7 +41,6 @@ exports.deleteUser = function (req, res) {
 }
 
 exports.authenticate = function (req, res) {
-
 	User.findOne({
 		teamid: req.body.teamid
 	}, function (err, user) {
