@@ -1,3 +1,9 @@
 node_modules
 Compete-Server/public/libs
 Compete-React/build
+/Worker/Worker Client/nbproject/private/
+/Worker/Java Compiler/nbproject/private/
+/mongodb
+/Worker/Java Compiler/build/
+/Worker/Java Compiler/dist/
+/Worker/Worker Client/build/
