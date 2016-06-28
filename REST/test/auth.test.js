@@ -1,9 +1,5 @@
-var supertest = require('supertest');
-var should = require('should');
-
-var server = supertest.agent("http://localhost:8080");
-
-describe("Authentication", function(){
+module.exports = function(server){
+    describe("Authentication", function(){
     it("should return invalid teamid", function(done){
         server.post('/api/authenticate')
         .send({teamid: "Team-1", password: "password"})
@@ -41,3 +37,4 @@ describe("Authentication", function(){
         });
     });
 });
+}
