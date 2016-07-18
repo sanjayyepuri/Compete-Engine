@@ -7,6 +7,6 @@ var exchange = rabbit.default();
 var task_queue =  exchange.queue({name: 'task_queue', durable: true});
 
 
-modules.export = function(submission, submissionId){
+exports.createSubmission = function(submission, submissionId){
     exchange.publish({submission : submission, id: submissionId}, {key : 'task_queue'});
 }
