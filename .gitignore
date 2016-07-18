@@ -1,13 +1,19 @@
 node_modules
 Compete-Server/public/libs
 Compete-React/build
-<<<<<<< HEAD
+typings
+.vscode
+
+.browse.VC.db
+.browse.VC.db-shm
+.browse.VC.db-wal
+
 /Worker/Worker Client/nbproject/private/
 /Worker/Java Compiler/nbproject/private/
 /mongodb
 /Worker/Java Compiler/build/
 /Worker/Java Compiler/dist/
 /Worker/Worker Client/build/
-=======
-.vscode
->>>>>>> refs/remotes/origin/master
+
+
+
