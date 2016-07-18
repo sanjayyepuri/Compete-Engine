@@ -2,14 +2,12 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
-var Reponse = require('../models/response.js');
+var Response = require('../models/response.js');
 
-var Competitor = require('../models/competitor.js');
-var compController = require('../controllers/competitorCtrl.js');
-var userController = require('../controllers/userCtrl.js');
+var subController = require('../controllers/submissionCtrl.js');
 
 /*
- * Competitor User Level: 0
+ * Worker User Level: 3 
  */
 router.use(function (req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -20,7 +18,7 @@ router.use(function (req, res, next) {
         return res.status(500).send(new Response(false, null, err, 'Failed to Authenticate.'));
       }
       else {
-        if (decoded.level === 0) {
+        if (decoded.level === 3) {
           req.user = decoded;
           next();
         }
@@ -35,14 +33,10 @@ router.use(function (req, res, next) {
   }
 });
 
-//Competitor CRUD
-router.get('/competitor', compController.getAll);
-router.post('/competitor', compController.createCompetitor);
-router.delete('/competitor/:team_id', compController.deleteCompetitor);
-
-//User CRUD
-router.get('/user', userController.getAll);
-router.post('/user', userController.createUser);
-router.delete('/user/:team_id', userController.deleteUser);
-
-module.exports = router;
+/*
+ * url: /api/worker/file
+ * method: POST 
+ * parameters: submission_id
+ * return: A string with contents of submission
+ */ 
+router.post('/file', subController.getFile);

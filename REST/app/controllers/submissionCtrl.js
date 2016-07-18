@@ -9,8 +9,6 @@ var Grid = require('gridfs-stream');
 var mongoose = require('mongoose');
 var GridFS = Grid(mongoose.connection.db, mongoose.mongo);
 
-var uploadsfolder = '/Users/sanjayyepuri/Documents/CompeteEngine/fileuploads/';
-
 
 exports.getSubmissions = function (req, res) {
   Submission.find({ team_id: req.user._id }, function (err, data) {
