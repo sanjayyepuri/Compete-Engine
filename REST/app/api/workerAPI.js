@@ -40,3 +40,5 @@ router.use(function (req, res, next) {
  * return: A string with contents of submission
  */ 
 router.post('/file', subController.getFile);
+
+module.exports = router;

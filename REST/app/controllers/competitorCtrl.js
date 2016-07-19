@@ -1,6 +1,7 @@
 var Competitor = require('../models/competitor.js');
 var User = require('../models/user.js');
 
+var Response = require('../models/response.js');
 
 exports.createCompetitor = function (req, res) {
 	var competitor = new Competitor({
@@ -11,7 +12,7 @@ exports.createCompetitor = function (req, res) {
 
 	competitor.save(function (err) {
 		if (err)
-			res.send(err);
+			res.status(500).send(new Response(false, null, err, 'User Failed to be Created'));
 		var user = new User();
 		user.teamid = req.body.teamid;
 		user.password = user.generateHash(req.body.password);
@@ -19,8 +20,8 @@ exports.createCompetitor = function (req, res) {
 		user.competitor = competitor._id;
 		user.save(function (err) {
 			if (err)
-				res.send(err);
-			res.json({ success: true, message: 'User created successfully' });
+				res.status(500).send(new Response(false, null, err, 'User Failed to be Created.'));
+			res.json(new Response(true, null, null, 'User Created.'));
 		});
 	})
 }
@@ -29,23 +30,23 @@ exports.deleteCompetitor = function (req, res) {
 		_id: req.params.team_id
 	}, function (err) {
 		if (err)
-			res.send(err);
+			res.status(500).send(new Response(false, null, err, 'User Failed to be Deleted.'));
 		Competitor.remove({
 			_id: req.params.team_id
 		}, function (err) {
 			if (err)
-				res.send(err);
+				res.status(500).send(new Response(false, null, err, 'User Failed to be Deleted.'));
 		});
-		res.json({ success: true, message: 'User deleted' });
+		res.send(new Response(true, null, null, 'User Deleted.'));
 	});
 }
 
 exports.getAll = function (req, res) {
 	Competitor.find(function (err, competitors) {
 		if (err) {
-			res.send(err);
+			res.status(500).send(new Reponse(false, null, err, 'Unable to get All Users'));
 		}
-		res.json({ success: true, data: competitors });
+		res.json(new Reponse(true, data, null, 'Users Sucessfully Retrieved.'));
 	});
 }
 
@@ -54,7 +55,7 @@ exports.getCompetitor = function (req, res) {
 		.findOne({ _id: req.user._id })
 		.populate('members')
 		.exec(function (err, competitor) {
-			if (err) res.send({ success: false, error: err });
-			res.json({ success: true, data: competitor });
+			if (err) res.statu(500).send(new Response(false, null, err, 'Unable to get User'));
+			res.json(new Response(true, competitor, null, 'User Sucessfully Retrieved'));
 		});
 }

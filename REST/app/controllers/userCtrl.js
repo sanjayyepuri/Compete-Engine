@@ -2,11 +2,12 @@ var User = require('../models/user.js');
 var Competitor = require('../models/competitor.js');
 var jwt = require('jsonwebtoken');
 
+var Response = require('../models/response.js');
 
 exports.getAll = function (req, res) {
 	User.find(function (err, users) {
-		if (err) res.send({ success: false, error: err });
-		res.json({ success: true, data: users });
+		if (err) res.status(500).send(new Response(false, null, err, 'Unable to Retrieve Users.'));;
+		res.json(new Response(true, users, null, 'Users Retrieved.'));
 	});
 }
 
@@ -19,8 +20,8 @@ exports.createUser = function (req, res) {
 	});
 	user.save(function (err) {
 		if (err)
-			res.send(err);
-		res.json({ success: true, message: 'User created successfully' });
+			res.status(500).send(new Response(false, null, err, 'Unable to Create User.'));
+		res.json(new Response(true, null, null, 'User Created Successfully.  '));
 	})
 }
 // Deletes User and connected Competitor Objects from Database
@@ -29,14 +30,14 @@ exports.deleteUser = function (req, res) {
 		_id: req.params.team_id
 	}, function (err) {
 		if (err)
-			res.send(err);
+			res.status(500).send(new Response(false, null, err, 'Unable to Delete User.'));
 		Competitor.remove({
 			_id: req.params.team_id
 		}, function (err) {
 			if (err)
-				res.send(err);
+				res.status(500).send(new Response(false, null, err, 'Unable to Delete User.'));
 		});
-		res.json({ success: true, message: 'User deleted' });
+		res.json(new Response(true, null, null, 'User Deleted Successfully.'));
 	});
 }
 
@@ -44,22 +45,17 @@ exports.authenticate = function (req, res) {
 	User.findOne({
 		teamid: req.body.teamid
 	}, function (err, user) {
-		if (err) throw err;
-		if (!user) res.json({ success: false, auth: "Incorrect Team ID" });
+		if (err) res.status(500).send(new Response(false, null, err, 'Unable to Authenticate.'));
+		if (!user) res.json(new Response(false, null, null, 'Incorrect Team ID.'));
 		else if (user) {
 			if (!user.validPassword(req.body.password)) {
-				res.json({ success: false, auth: "Incorrect Password" });
+				res.json(new Response(false, null, null, 'Incorrect Password.'));
 			}
 			else if (user.validPassword(req.body.password)) {
 				var token = jwt.sign({ _id: user.competitor, level: user.level, teamid: user.teamid }, "tokensecret", {
 					expiresIn: 86400
 				});
-
-				res.json({
-					success: true,
-					auth: 'Logged in',
-					token: token
-				});
+				res.json(new Response(true, token, null, 'Successfully Authenticated.'));
 			}
 		}
 	})
