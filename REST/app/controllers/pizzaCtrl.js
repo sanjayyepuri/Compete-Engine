@@ -23,7 +23,7 @@ exports.getPizza = function (req, res) {
 }
 
 
-exports.updatePizza = functin(req, res){
+exports.updatePizza = function(req, res){
     Pizza.findOneAndUpdate({ teamid: req.user.teamid }, {
         pepperoni: req.body.pepperoni,
         cheese: req.body.cheese

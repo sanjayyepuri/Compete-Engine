@@ -35,7 +35,7 @@ exports.getMembers = function (req, res) {
 
 exports.getAll = function(req, res){
   Member.find({}, function(err, members){
-    if (err) res.send({ success: false, error: err });
+    if (err) res.send({ success: false, error: err });Co
     res.json({ success: true, error: err, data: members});
   });
 }
