@@ -1,0 +1,23 @@
+<ba-card>
+    <h1>Written Scores</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>School</td>
+                <td>Score</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let competitor of competitors; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{competitor.firstname}}</td>
+                <td>{{competitor.lastname}}</td>
+                <td>School</td>
+                <td>{{competitor.writtenscore}}</td>
+            </tr>
+    </table>
+</ba-card>

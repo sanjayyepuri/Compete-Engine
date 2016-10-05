@@ -1,0 +1,69 @@
+<div class="row">
+  <ba-card class="col-xlg-6 col-xl-6 col-lg-12 col-sm-12 col-xs-12" title="Welcome to Seven Lakes" baCardClass="traffic-panel medium-card">
+    <div>
+
+    </div>
+  </ba-card>
+  <ba-card class="col-md-6" title="Schedule" baCardClass="medium-card">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>7:30 A.M.</td>
+          <td>Set-up and Registration</td>
+        </tr>
+        <tr>
+          <td>8:30 A.M. – 9:15 A.M.</td>
+          <td>Written Exam</td>
+        </tr>
+        <tr>
+          <td>9:30 A.M.</td>
+          <td>Introductory Remarks</td>
+        </tr>
+        <tr>
+          <td>10:00 A.M.</td>
+          <td>Practice Problems</td>
+        </tr>
+        <tr>
+          <td>10:30 A.M. – 12:30 P.M.</td>
+          <td>Programming Contest</td>
+        </tr>
+        <tr>
+          <td>12:30 P.M. – 1:30 P.M.</td>
+          <td>Appeals</td>
+        </tr>
+        <tr>
+          <td>2:00 P.M.</td>
+          <td>Awards</td>
+        </tr>
+      </tbody>
+    </table>
+  </ba-card>
+  <ba-card class="col-md-6" title="Team Information" baCardClass="traffic-panel medium-card">
+    <div *ngIf="team">
+      <h2>{{team.school}} <a href="/#/competition/settings">(edit)</a></h2>
+      <div class="row">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>#</td>
+              <td>First Name</td>
+              <td>Last Name</td>
+              <td>Score</td>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let competitor of team.members; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{competitor.firstname}}</td>
+              <td>{{competitor.lastname}}</td>
+              <td>{{competitor.writtenscore}}</td>
+            </tr>
+        </table>
+      </div>
+    </div>
+  </ba-card>
+</div>
+<div class="row">
+
+</div>

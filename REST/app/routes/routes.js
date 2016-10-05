@@ -7,8 +7,8 @@ module.exports = function (app) {
   var workerAPI = require('../api/workerAPI');
 
   app.use('/api/competitor', competitorAPI);
-  app.use('/api/admin', adminAPI);
-  app.use('/api/worker', workerAPI);
+  //app.use('/api/admin', adminAPI);
+  //app.use('/api/worker', workerAPI);
 
   //Public routes
   app.post('/api/authenticate', userController.authenticate);

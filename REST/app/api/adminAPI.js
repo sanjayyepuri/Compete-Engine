@@ -16,7 +16,7 @@ router.use(function (req, res, next) {
   if (token) {
     jwt.verify(token, 'tokensecret', function (err, decoded) {
       if (err) {
-        
+
         return res.status(500).send(new Response(false, null, err, 'Failed to Authenticate.'));
       }
       else {
@@ -25,7 +25,7 @@ router.use(function (req, res, next) {
           next();
         }
         else {
-          
+
           return res.status(403).send();
         }
       }
@@ -41,7 +41,8 @@ router.post('/competitor', compController.createCompetitor);
 router.delete('/competitor/:team_id', compController.deleteCompetitor);
 
 //User CRUD
-router.get('/user', userController.getAll);
+router.get('/users', userController.getAll);
+router.get('/user', userController.get);
 router.post('/user', userController.createUser);
 router.delete('/user/:team_id', userController.deleteUser);
 

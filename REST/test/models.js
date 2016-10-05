@@ -21,7 +21,7 @@ var Competitor = require('../app/models/competitor.js');
 
 exports.generateCompetitors = function () {
   for (var i = 0; i < 3; ++i) {
-    generateCompetitor('Team ' + (i + 1), 'password', 'school');
+    generateCompetitor('Team ' + (i + 1), 'password', 'test');
   };
 }
 function generateCompetitor(teamid, password, school) {
@@ -29,11 +29,12 @@ function generateCompetitor(teamid, password, school) {
     teamid: teamid,
     school: school,
     teamscore: 0,
+    members: []
   });
 
   competitor.save(function (err) {
     if (err)
-      res.send(err);
+      console.log(err);
     var user = new User();
     user.teamid = teamid;
     user.password = user.generateHash(password);

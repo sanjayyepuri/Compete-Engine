@@ -10,6 +10,7 @@ exports.addMember = function (req, res) {
       teamid: competitor.teamid,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
+      school: req.body.school,
       writtenscore: 0
     });
     member.save(function (err) {
@@ -28,7 +29,14 @@ exports.addMember = function (req, res) {
 exports.getMembers = function (req, res) {
   Member.find({ team_id: req.user._id }, function (err, members) {
     if (err) res.send({ success: false, error: err });
-    res.json({ success: true, error: err });
+    res.json({ success: true, error: err, data: members});
+  });
+}
+
+exports.getAll = function(req, res){
+  Member.find({}, function(err, members){
+    if (err) res.send({ success: false, error: err });
+    res.json({ success: true, error: err, data: members});
   });
 }
 

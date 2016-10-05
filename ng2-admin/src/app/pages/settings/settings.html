@@ -1,0 +1,41 @@
+<ba-card>
+  <div>
+    <div *ngIf="team">
+      <h1> Team Info </h1>
+      <form (ngSubmit)="onSubmit()" class="form-horizontal">
+        <div class="form-group row">
+          <label for="schoolInput" class="col-sm-2 control-label">School</label>
+
+          <div class="col-sm-10">
+            <input class="form-control" [(ngModel)]="team.school" name="school" id="schoolInput" placeholder="School" required>
+          </div>
+        </div>
+        <h4>Competitors <span *ngIf="team.members.length < 3" (click)="addCompetitor()" class="add-competitor"><i class="ion-android-add-circle"></i></span></h4>
+
+        <div *ngFor="let competitor of team.members; let i = index;">
+          <div class="form-group row">
+            <p class="col-sm-2"> Member {{i+1}} <span (click)="removeCompetitor(i)" class="remove-competitor"><i class="ion-android-remove-circle"></i></span></p>
+            <label for="schoolInput" class="col-sm-2 control-label">First Name</label>
+
+            <div class="col-sm-3">
+              <input class="form-control" [(ngModel)]="competitor.firstname" [name]="'firstname'+i" placeholder="First Name" required>
+            </div>
+            <label for="schoolInput" class="col-sm-2 control-label">Last Name</label>
+
+            <div class="col-sm-3">
+              <input class="form-control" [(ngModel)]="competitor.lastname" [name]="'lastname'+i" placeholder="Last Name" required>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <div class="col-sm-offset-2 col-sm-1 0">
+            <button type="submit" class="btn btn-primary btn-auth">Update</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</ba-card>

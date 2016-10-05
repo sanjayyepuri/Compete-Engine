@@ -15,5 +15,8 @@ typings
 /Worker/Java Compiler/dist/
 /Worker/Worker Client/build/
 
+/ng2-admin/node_modules
+/ng2-admin/dist
+
 
 

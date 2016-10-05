@@ -10,6 +10,14 @@ exports.getAll = function (req, res) {
 	});
 }
 
+exports.get = function (req, res){
+	User.find({teamid: req.user.teamid}, function(err, user){
+		if (err) res.send({ success: false, error: err });
+		res.json({ success: true, data: user });
+	})
+
+}
+
 //Creates a new User and Competitor
 exports.createUser = function (req, res) {
 	var user = new User({
@@ -58,7 +66,10 @@ exports.authenticate = function (req, res) {
 				res.json({
 					success: true,
 					auth: 'Logged in',
-					token: token
+					data:{
+							token: token,
+							teamid: user.teamid
+						 }
 				});
 			}
 		}

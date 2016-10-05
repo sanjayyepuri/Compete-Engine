@@ -3,13 +3,14 @@ var jwt = require('jsonwebtoken');
 var router = express.Router();
 var multer = require('multer');
 
-var Reponse = require('../models/response.js');
+var Response = require('../models/response.js');
 
 var Competitor = require('../models/competitor.js');
 var compController = require('../controllers/competitorCtrl.js');
 var userController = require('../controllers/userCtrl.js');
 var memController = require('../controllers/memberCtrl.js');
 var subController = require('../controllers/submissionCtrl.js');
+var pizzaController = require('../controllers/pizzaCtrl.js');
 
 
 /*
@@ -20,16 +21,16 @@ router.use(function (req, res, next) {
   if (token) {
     jwt.verify(token, 'tokensecret', function (err, decoded) {
       if (err) {
-        
+
         return res.status(500).send(new Response(false, null, err, 'Failed to Authenticate.'));
       }
       else {
-        if (decoded.level === 9) {
+        if (decoded.level <= 9) {
           req.user = decoded;
           next();
         }
         else {
-          
+
           return res.status(403).send();
         }
       }
@@ -39,14 +40,14 @@ router.use(function (req, res, next) {
   }
 });
 
-/* 
+/*
  * url: /api/competitor/upload
  * method: POST
- * parameters: teamid, problemid, file 
+ * parameters: teamid, problemid, file
  */
 router.post('/upload', subController.uploadFile);
 
-/* 
+/*
  * url: /api/competitor/submissions
  * method: GET
  * parameters: teamid
@@ -58,12 +59,21 @@ router.get('/submissions', subController.getSubmissions);
  * method: POST
  * parameters: submission_id
  * return: A string with contents of submission
- */ 
+ */
 router.post('/file', subController.getFile);
 
-// router.get('/', compController.getCompetitor);
+router.get('/', compController.getCompetitor);
 // router.post('/member', memController.addMember);
 // router.delete('/member/:member_id', memController.removeMember)
 // router.get('/teams', compController.getAll);
+
+router.post('/update', compController.updateCompetitor);
+router.get('/member/delete/:member_id', memController.removeMember);
+router.get('/members', memController.getAll);
+
+router.get('/pizza', pizzaController.getPizza);
+router.post('/pizza', pizzaController.createPizza);
+router.post('/pizza/update', pizzaController.updatePizza);
+
 
 module.exports = router;

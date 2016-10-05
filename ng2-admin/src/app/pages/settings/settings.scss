@@ -1,0 +1,15 @@
+@import '../../theme/sass/conf/colorSchemes/slakes';
+
+.add-competitor {
+    color: $success;
+    :hover{
+        color: $info;
+    }
+
+}
+.remove-competitor {
+    color: $danger;
+    :hover{
+        color: $info;
+    }
+}
