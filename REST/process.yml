@@ -1,0 +1,6 @@
+apps:
+  - script   : server.js
+    instances: 0
+    exec_mode: cluster
+    watch  : true
+    name: REST

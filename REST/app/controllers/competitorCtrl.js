@@ -29,8 +29,9 @@ exports.deleteCompetitor = function (req, res) {
 	User.remove({
 		_id: req.params.team_id
 	}, function (err) {
-		if (err)
+		if (err) {
 			res.send(err);
+		}
 		Competitor.remove({
 			_id: req.params.team_id
 		}, function (err) {
@@ -55,8 +56,10 @@ exports.getCompetitor = function (req, res) {
 		.findOne({ _id: req.user._id })
 		.populate('members')
 		.exec(function (err, competitor) {
-			if (err) res.send({ success: false, error: err });
-			if (competitor) {
+			if (err) {
+				res.send({ success: false, error: err });
+			}
+			else if (competitor) {
 				res.json({ success: true, data: competitor });
 			} else {
 				res.json({ success: false, error: 'Competitor not found.' });
@@ -83,8 +86,8 @@ exports.updateCompetitor = function (req, res) {
 				writtenscore: -1
 			});
 			memberIds.push(newMember._id);
-			newMember.save(function(err){
-				if(err){
+			newMember.save(function (err) {
+				if (err) {
 					console.log(err);
 					res.send(err);
 				}
@@ -105,22 +108,25 @@ exports.updateCompetitor = function (req, res) {
 		competitor.save(function (err) {
 			if (err)
 				res.send({ success: false, error: err });
-			res.json({ success: true, message: 'Competitor Updated.' });
+			else {
+				res.json({ success: true, message: 'Competitor Updated.' });
+			}
 		});
 
 	});
 }
 var Clarification = require('../models/clarification.js');
 
-exports.createClarification = function (req, res){
-  var clarification = new Clarificaiton({
-    teamid: req.user.teamid,
-    problemid: req.body.problemid,
-    message: req.body.message
-  });
+exports.createClarification = function (req, res) {
+	var clarification = new Clarificaiton({
+		teamid: req.user.teamid,
+		problemid: req.body.problemid,
+		message: req.body.message
+	});
 
-  clarification.save(function(err) {
-    if(err) res.send({success: false, error: err});
-    res.send({success: true, message: 'Clarification submitted'});
-  });
+	clarification.save(function (err) {
+		if (err) res.send({ success: false, error: err });
+
+		res.send({ success: true, message: 'Clarification submitted' });
+	});
 }

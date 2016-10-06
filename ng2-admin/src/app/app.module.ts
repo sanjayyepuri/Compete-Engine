@@ -18,6 +18,8 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+
 import { AuthService } from './services/auth.service';
 import { CompeteService } from './services/compete.service';
 import { StateService } from './services/state.service';
@@ -29,7 +31,8 @@ const APP_PROVIDERS = [
   GlobalState,
   CompeteService,
   AuthService,
-  StateService
+  StateService,
+  ToastModule
 ];
 
 type StoreType = {

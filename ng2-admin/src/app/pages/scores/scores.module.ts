@@ -7,6 +7,7 @@ import { ScoresComponent } from './scores.component';
 import { routing }       from './scores.routing';
 
 
+
 @NgModule({
   imports: [
     CommonModule,

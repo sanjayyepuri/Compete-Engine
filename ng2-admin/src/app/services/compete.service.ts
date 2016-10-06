@@ -94,7 +94,7 @@ export class CompeteService {
             })
     }
 
-    getMembers(): Observable<Competitor[]>{
+    getMembers(): Observable<Competitor[]> {
         let headers = new Headers({
             'x-access-token': localStorage.getItem('token')
         });
@@ -102,7 +102,7 @@ export class CompeteService {
 
         return this.http.get(this.apiUrl + '/api/competitor/members', options)
             .map((res) => {
-                let data:Competitor[] = res.json().data;
+                let data: Competitor[] = res.json().data;
 
                 return data || {};
             })
@@ -111,25 +111,60 @@ export class CompeteService {
             })
     }
 
-    getPizza(): Observable<any>{
+    getPizza(): Observable<any> {
         let headers = new Headers({
             'x-access-token': localStorage.getItem('token')
         });
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.apiUrl + '/api/competitor/members', options)
+        return this.http.get(this.apiUrl + '/api/competitor/pizza', options)
             .map((res) => {
-                let data:Competitor[] = res.json().data;
-
-                return data || {};
+                let data = res.json();
+                return data;
             })
             .catch((err) => {
                 return Observable.throw(err);
             })
     }
-    updatePizza(): Observable<any>{
-        return undefined;
+    updatePizza(pepperoni: number, cheese: number): Observable<any> {
+        let headers = new Headers({
+            'x-access-token': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({ headers: headers });
+
+        let body = JSON.stringify({
+            cheese: cheese,
+            pepperoni: pepperoni
+        });
+        return this.http.post(this.apiUrl + '/api/competitor/pizza/update', body, options)
+            .map((res) => {
+                let data = res.json();
+                return data || {};
+            })
+            .catch((err) => {
+                return Observable.throw(err);
+            });
     }
-    postPizza(): Observable<any>{
-        return undefined;
+
+
+    postPizza(pepperoni: number, cheese: number): Observable<any> {
+        let headers = new Headers({
+            'x-access-token': localStorage.getItem('token'),
+            'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({ headers: headers });
+
+        let body = JSON.stringify({
+            cheese: cheese,
+            pepperoni: pepperoni
+        });
+        return this.http.post(this.apiUrl + '/api/competitor/pizza', body, options)
+            .map((res) => {
+                let data = res.json();
+                return data || {};
+            })
+            .catch((err) => {
+                return Observable.throw(err);
+            });
     }
 }

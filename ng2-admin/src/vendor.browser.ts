@@ -25,6 +25,9 @@ import 'bootstrap-loader';
 import 'font-awesome-sass-loader';
 import 'lodash';
 
+// Other
+import 'ng2-toastr/ng2-toastr';
+
 if ('production' === ENV) {
   // Production
 } else {

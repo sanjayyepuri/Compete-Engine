@@ -18,5 +18,7 @@ typings
 /ng2-admin/node_modules
 /ng2-admin/dist
 
+*.log
+
 
 

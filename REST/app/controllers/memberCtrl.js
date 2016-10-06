@@ -4,8 +4,9 @@ var Competitor = require('../models/competitor.js');
 
 exports.addMember = function (req, res) {
   Competitor.findOne({ _id: req.user._id }, function (err, competitor) {
-    if (err)
+    if (err){
       res.send({ success: false, error: err });
+    }
     var member = new Member({
       teamid: competitor.teamid,
       firstname: req.body.firstname,
@@ -18,9 +19,12 @@ exports.addMember = function (req, res) {
         res.send({ success: false, error: err });
       competitor.members.push(member._id);
       competitor.save(function (err) {
-        if (err)
+        if (err) {
           res.send({ success: false, error: err });
-        res.json({ success: true, message: 'Member added.' });
+        }
+        else {
+          res.json({ success: true, message: 'Member added.' });
+        }
       });
     });
   });
@@ -28,15 +32,23 @@ exports.addMember = function (req, res) {
 
 exports.getMembers = function (req, res) {
   Member.find({ team_id: req.user._id }, function (err, members) {
-    if (err) res.send({ success: false, error: err });
-    res.json({ success: true, error: err, data: members});
+    if (err) {
+      res.send({ success: false, error: err });
+    }
+    else {
+      res.json({ success: true, error: err, data: members });
+    }
   });
 }
 
-exports.getAll = function(req, res){
-  Member.find({}, function(err, members){
-    if (err) res.send({ success: false, error: err });Co
-    res.json({ success: true, error: err, data: members});
+exports.getAll = function (req, res) {
+  Member.find({}, function (err, members) {
+    if (err) {
+      res.send({ success: false, error: err });
+    }
+    else {
+      res.json({ success: true, error: err, data: members });
+    }
   });
 }
 
@@ -47,8 +59,12 @@ exports.removeMember = function (req, res) {
     }
     Competitor.update({ _id: req.user._id }, { $pullAll: { members: [req.params.member_id] } },
       function (err) {
-        if (err) res.send({ success: false, error: err });
-        res.json({ success: true, message: 'Member deleted' });
+        if (err) {
+          res.send({ success: false, error: err });
+        }
+        else {
+          res.json({ success: true, message: 'Member deleted' });
+        }
       });
 
   })

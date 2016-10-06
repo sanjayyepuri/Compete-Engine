@@ -35,7 +35,11 @@ mongoose.connection.on('disconnected', function () {
 //require('./config/passport.js')(passport);
 
 // Setup Express
-app.use(morgan('tiny'));
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'log/requests.log'), {flags: 'a'})
+
+
+app.use(morgan('combined', {stream: accessLogStream}));
+app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
