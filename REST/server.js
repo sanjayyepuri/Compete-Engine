@@ -66,6 +66,6 @@ require('./app/realtime/countdown.js')(server);
 
 //Tests
 var tests = require('./test/models.js');
-// tests.generateAdminAccount();
-// tests.generateCompetitors();
+//tests.generateAdminAccount();
+//tests.generateCompetitors();
 

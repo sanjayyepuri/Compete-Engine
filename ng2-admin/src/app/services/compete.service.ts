@@ -11,7 +11,7 @@ import { Team } from '../models/team.model';
 @Injectable()
 export class CompeteService {
 
-    apiUrl: string = 'http:/localhost:8080'
+    apiUrl: string = 'http://localhost:8080'
     constructor(private http: Http) { }
 
     getAuthentication(username: string, password: string): Observable<any> {
