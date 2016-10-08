@@ -1,6 +1,15 @@
 <div class="row">
-  <ba-card class="col-xlg-6 col-xl-6 col-lg-12 col-sm-12 col-xs-12" title="Welcome to Seven Lakes" baCardClass="traffic-panel medium-card">
+  <ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-xs-12 banner-text welcome-card" >
     <div>
+      <h1>Welcome to Seven Lakes Kickoff Classic!</h1>
+      <h4>
+        Please enter your team information in the settings tab on the left and order your
+        pizzas ($13 each).
+      </h4>
+      <br>
+      <h2> Downloads </h2>
+      <h5>Download pc^2 from the Downloads tab on the left. And log in using your username and password (same as this). Be prepared
+        to submit the Dryrun (Problem 0: Mr.Schniggles). Also sample data will be available in the Downloads tab.</h5>
 
     </div>
   </ba-card>
@@ -40,7 +49,7 @@
   </ba-card>
   <ba-card class="col-md-6" title="Team Information" baCardClass="traffic-panel medium-card">
     <div *ngIf="team">
-      <h2>{{team.school}} <a href="/#/competition/settings">(edit)</a></h2>
+      <h2>{{team.school}} <a href="/#/competition/settings"><i class="ion-android-settings"></i></a></h2>
       <div class="row">
         <table class="table table-striped">
           <thead>

@@ -40,8 +40,10 @@ export class PizzaComponent implements OnInit {
       this.compete.postPizza(this.pizza.pepperoni, this.pizza.cheese)
         .subscribe(
         data => {
+          console.log(data);
           if (data.success) {
             this.ordered = true;
+            this.toast.success(data.message, 'Success!');
           }
           else {
 

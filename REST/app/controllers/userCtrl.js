@@ -12,8 +12,12 @@ exports.getAll = function (req, res) {
 
 exports.get = function (req, res){
 	User.find({teamid: req.user.teamid}, function(err, user){
-		if (err) res.send({ success: false, error: err });
-		res.json({ success: true, data: user });
+		if (err) {
+			res.send({ success: false, error: err });
+		}
+		else {
+			res.json({ success: true, data: user });
+		}
 	})
 
 }
@@ -52,8 +56,12 @@ exports.authenticate = function (req, res) {
 	User.findOne({
 		teamid: req.body.teamid
 	}, function (err, user) {
-		if (err) throw err;
-		if (!user) res.json({ success: false, auth: "Incorrect Team ID" });
+		if (err) {
+			res.json({ success: false, auth: err });
+		}
+		else if (!user) {
+			res.json({ success: false, auth: "Incorrect Team ID" });
+		}
 		else if (user) {
 			if (!user.validPassword(req.body.password)) {
 				res.json({ success: false, auth: "Incorrect Password" });

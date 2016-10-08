@@ -18,7 +18,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'Compete-Engine',
+  title: 'Kickoff Classic',
   description: '',
   baseUrl: './',
   isDevServer: helpers.isWebpackDevServer()

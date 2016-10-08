@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+
 
 import { CompeteService } from '../../services/compete.service';
 import { StateService } from '../../services/state.service';
@@ -19,7 +21,7 @@ export class SettingsComponent implements OnInit {
     team: Team;
     removed: string[] = [];
 
-    constructor(private compete: CompeteService) {
+    constructor(private compete: CompeteService, private toast: ToastsManager) {
 
     }
 
@@ -41,9 +43,14 @@ export class SettingsComponent implements OnInit {
     removeCompetitor(i) {
 
         if (this.team.members[i]._id) {
-            console.log('HI');
             this.compete.deleteMember(this.team.members[i]._id)
-                .subscribe(data => console.log(data));
+                .subscribe(data => {
+                    if(data.success){
+                        this.toast.success(data.message, 'Success!');
+                    }else {
+                        this.toast.error('Unable to update Team.', 'Failure!');
+                    }
+                });
 
         }
         this.team.members.splice(i, 1);
@@ -57,7 +64,12 @@ export class SettingsComponent implements OnInit {
 
         this.compete.updateTeam(this.team, this.removed)
             .subscribe((data) => {
-                console.log(data)
+                console.log(data);
+                if(data.success){
+                    this.toast.success(data.message, 'Success!');
+                } else {
+                    this.toast.error('Unable to update Team.', 'Failure!');
+                }
             });
     }
 

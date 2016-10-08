@@ -15,6 +15,7 @@
     "cors": "*",
     "express": "*",
     "express-session": "*",
+    "fast-csv": "^2.3.0",
     "formidable": "*",
     "gridfs-stream": "*",
     "jackrabbit": "*",

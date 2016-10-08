@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { AuthService } from '../../services/auth.service';
 
@@ -11,12 +12,12 @@ import { AuthService } from '../../services/auth.service';
 })
 export class Login {
 
-  public form:FormGroup;
-  public teamid:AbstractControl;
-  public password:AbstractControl;
-  public submitted:boolean = false;
+  public form: FormGroup;
+  public teamid: AbstractControl;
+  public password: AbstractControl;
+  public submitted: boolean = false;
 
-  constructor(fb:FormBuilder, private auth: AuthService) {
+  constructor(fb: FormBuilder, private auth: AuthService, private toast: ToastsManager) {
     this.form = fb.group({
       'teamid': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -26,15 +27,18 @@ export class Login {
     this.password = this.form.controls['password'];
   }
 
-  public onSubmit(values):void {
+  public onSubmit(values): void {
     this.submitted = true;
     if (this.form.valid) {
-      let success: boolean= this.auth.login(values.teamid, values.password);
-      if(!success){
-        console.log('Incorrect username or password');
-      }
-
-
+      this.auth.login(values.teamid, values.password).
+        subscribe(
+        success => {
+          console.log(success);
+          if (!success) {
+            this.toast.error('Incorrect username or password');
+          }
+        }
+        );
     }
   }
 }

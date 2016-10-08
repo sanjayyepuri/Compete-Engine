@@ -88,8 +88,7 @@ exports.updateCompetitor = function (req, res) {
 			memberIds.push(newMember._id);
 			newMember.save(function (err) {
 				if (err) {
-					console.log(err);
-					res.send(err);
+					res.send({ success: false, error: err });
 				}
 
 			});

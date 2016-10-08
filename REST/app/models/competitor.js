@@ -3,7 +3,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var competitorSchema = mongoose.Schema({
 	teamid: { type: String, unique: true, required: true, dropDups: true },
-	school: { type: String, required: true },
+	school: { type: String, required: false },
 	teamscore: { type: Number, required: true },
 	submissions: [{
 		type: mongoose.Schema.ObjectId,

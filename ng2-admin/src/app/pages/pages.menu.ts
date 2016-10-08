@@ -49,6 +49,47 @@ export const PAGES_MENU = [
             order: 0
           }
         }
+      },
+      {
+        // parent route
+        path: '',
+        data: {
+
+          // parent menu configuration
+          menu: {
+            title: 'Downloads',
+            icon: 'ion-android-download',
+            selected: false,
+            expanded: false,
+            order: 200,
+          }
+        },
+
+        // children routes
+        children: [
+          {
+            path: '',
+            data: {
+
+              // children menu item configuration
+              menu: {
+                title: 'PC^2',
+                url: '/assets/download/sampledata.zip'
+              }
+            }
+          },
+          {
+            path: '',
+            data: {
+
+              // children menu item configuration
+              menu: {
+                title: 'Sample Data',
+                url: '/assets/downloads/sampledata.zip'
+              }
+            }
+          }
+        ]
       }
     ]
   }

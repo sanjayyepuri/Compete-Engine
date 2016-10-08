@@ -13,7 +13,7 @@ exports.createPizza = function (req, res) {
             res.json({ success: false, error: err });
         }
         else {
-            res.json({ success: true, message: 'Pizza Order Submitted' });
+            res.json({ success: true, message: 'Pizza Order Submitted.' });
         }
     });
 
@@ -43,7 +43,7 @@ exports.updatePizza = function (req, res) {
             res.send({ success: false, error: err });
         }
         else {
-            res.json({ success: true, message: "Order Updated" });
+            res.json({ success: true, message: "Order Updated." });
         }
     });
 

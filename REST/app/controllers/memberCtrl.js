@@ -63,7 +63,7 @@ exports.removeMember = function (req, res) {
           res.send({ success: false, error: err });
         }
         else {
-          res.json({ success: true, message: 'Member deleted' });
+          res.json({ success: true, message: 'Member deleted.' });
         }
       });
 
